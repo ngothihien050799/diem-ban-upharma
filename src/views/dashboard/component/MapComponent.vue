@@ -1,0 +1,63 @@
+<template>
+  <div class="row m-5 map">
+    <div class="map-header">ĐỘ PHỦ NHÀ THUỐC UPHARMA</div>
+    <div class="map-item col-sm-12 col-md-8">
+      <l-map style="height: 700px" :zoom="zoom" :center="center">
+        <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+        <l-marker :lat-lng="markerLatLng"></l-marker>
+      </l-map>
+    </div>
+    <div class="map-list col-sm-12 col-md-4"><TableMap /></div>
+  </div>
+</template>
+
+<script>
+import TableMap from "./TableMap.vue";
+import {LMap, LTileLayer, LMarker} from 'vue3-leaflet';
+
+export default {
+  components: {
+    TableMap,
+     LMap,
+    LTileLayer,
+    LMarker
+  },
+  data() {
+    return {
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      attribution:
+        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      zoom: 10, //tỷ lệ thu phóng bản đồ
+      center: [20.9967994,105.8407837], //vị trí bản đồ
+      markerLatLng: [20.9967994,105.8407837], //vị trí marker
+    };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.map{
+  height: 700px;
+  &-header {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 50px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  /* Band color */
+
+  background: linear-gradient(180deg, #1d974a 0%, #1d974a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  &-item{
+    height: 900px !important;
+  }
+}
+}
+
+</style>

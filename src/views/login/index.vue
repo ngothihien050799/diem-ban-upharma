@@ -1,0 +1,201 @@
+<template>
+  <div class="login">
+    <img class="login-logo" src="@/assets/logo.webp" alt="Logo Upharma" />
+    <h1 class="login-title">Điểm bán Upharma</h1>
+
+    <div class="login-form">
+      <div class="login-form-item">
+        <div class="fa-solid fa-circle-user icon"></div>
+        <div class="form-item-input">
+          <input
+            v-model="input.username"
+            class="input"
+            type="text"
+            placeholder="Số điện thoại"
+            name="Số điện thoại"
+            autofocus
+          />
+        </div>
+      </div>
+      <div class="login-form-item">
+        <div class="fa-solid fa-key icon"></div>
+        <div class="form-item-input">
+          <input
+            v-model="input.password"
+            class="input"
+            type="password"
+            placeholder="Mật khẩu"
+            name="Mật khẩu"
+            required
+          />
+        </div>
+      </div>
+
+      <div>
+        <button @click="handleLogin" class="login-form-submit">
+          ĐĂNG NHẬP
+        </button>
+      </div>
+      <div class="login-form-lotpassword">
+        <span class="lotpassword"
+          >Quên mật khẩu?<a class="getpassword" href=""> Lấy mật khẩu</a></span
+        >
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      input: {
+        username: "",
+        password: "1",
+      },
+      username: "0349019388",
+      password: "123",
+    };
+  },
+  methods: {
+    handleLogin() {
+      this.ValidatePhoneNumber(this.input.username);
+      // console.log(this.ValidatePhoneNumber(this.input.username));
+      // console.log(this.input.username, this.input.password);
+      if (this.ValidatePhoneNumber(this.input.username)) {
+        if (
+          this.input.username == this.username &&
+          this.input.password == this.password
+        ) {
+          //   alert("Đăng nhập thành công");
+          this.$router.push("/thong-ke");
+        } else {
+          alert("Tài khoản hoặc mật khẩu không chính xác!");
+        }
+      } else {
+        alert("Tài khoản không hợp lệ!");
+      }
+    },
+    ValidatePhoneNumber(phone) {
+      return /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.test(phone);
+    },
+  },
+  watch: {},
+  computed: {},
+};
+</script>
+
+<style lang="scss" scoped>
+.login {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background: url("@/assets/backgroundLogin.png") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  &-logo {
+    width: 150px;
+    height: 150px;
+    margin-top: 140px;
+    filter: drop-shadow(15px -3px 4px rgba(0, 0, 0, 0.2));
+    border-radius: 20px;
+  }
+
+  &-title {
+    font-family: "Dancing Script", cursive;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 50px;
+    color: #fff;
+  }
+
+  &-form {
+    width: 480px;
+    background: rgba(124, 179, 76, 0.432);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+    font-family: "Roboto", sans-serif;
+    .icon {
+      height: 25px;
+      color: #cfd7d0;
+    }
+    &-item {
+      max-width: 400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 10px;
+      align-items: center;
+
+      .input {
+        width: 350px;
+        height: 35px;
+        background: rgba(175, 205, 161, 0.39);
+        border: none;
+        border-bottom: 1px solid #cfd7d0;
+        font-size: 18px;
+        color: #fff;
+        margin-left: 15px;
+        padding-left: 5px;
+      }
+    }
+    &-submit {
+      width: 120px;
+      height: 40px;
+      background: linear-gradient(180deg, #9fe318 0%, #0d5c15 100%);
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      margin-top: 15px;
+      &:active {
+        // box-shadow: 0 2px rgb(6, 104, 19);
+        transform: translateY(2px);
+      }
+    }
+    &-lotpassword {
+      font-size: 14px;
+      margin-top: 10px;
+      .lotpassword {
+        color: #fff;
+        .getpassword {
+          color: #db490f;
+        }
+      }
+    }
+  }
+}
+</style>
+<style lang="scss">
+@media screen and (max-width: 450px) {
+  .login {
+    background: url("@/assets/Login13Pro.png") no-repeat !important;
+    background-size: cover !important;
+    &-logo {
+      width: 100px !important;
+      height: 100px !important;
+      margin-top: 100px !important;
+    }
+    &-title {
+      font-size: 35px !important;
+    }
+    &-form {
+      background: none !important;
+      .input {
+        width: 300px !important;
+        font-size: 15px !important;
+      }
+      &-lotpassword {
+        text-align: center !important;
+      }
+    }
+  }
+}
+</style>
