@@ -42,8 +42,7 @@ export default {
   
     border-radius: 20px;
   &-info {
-    justify-content: space-between;
-    align-items: center;
+    text-align: left;
     .name {
       color: rgb(93, 105, 93);
       font-weight: 700;

@@ -1,61 +1,57 @@
 <template>
-  <div class="page-wrapper m-5">
-    <div class="page-body">
-      <div class="row">
-        <div class="col-lg-1 col-md-12 m-3">
-          <FormComponent :FormItem="formList[0]" />
-        </div>
-        <div class="col-lg-2 m-3">
+  <div class="body-page">
+    <div class="row">
+      <div
+        class="col-lg-2 col-md-12"
+        v-for="(item, index) in selectList"
+        :key="index"
+      >
+        <SelectComponent :SelectItem="item" />
+      </div>
+      <!-- <div class="col-lg-2 ">
           <FormComponent :FormItem="formList[1]" />
         </div>
-        <div class="col-lg-2 m-3">
+        <div class="col-lg-2 ">
           <FormComponent :FormItem="formList[2]" />
-        </div>
-      </div>
-      <div class="row mt-4">
-        <div class="col-md-4" v-for="(item, index) in cardList" :key="index">
-          <CardCoponent :CardItem="item" />
-        </div>
-        <!-- <div class="col-md-4 mb-2">
-          <CardCoponent :CardItem="cardList[1]" />
-        </div>
-        <div class="col-md-4 mb-2">
-          <CardCoponent :CardItem="cardList[2]" />
         </div> -->
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-4" v-for="(item, index) in cardList" :key="index">
+        <CardCoponent :CardItem="item" />
       </div>
-      <div class="row mt-4">
-        <div class="col-sm-12 col-md-12 col-lg-8 bg-white chart-right">
-          <ChartComponent />
-        </div>
-        <div class="col-md-4">
-          <round-chart
-            v-for="(item, index) in rounds"
-            :key="index"
-            :round="item"
-          />
-        </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-sm-12 col-md-12 col-lg-8 bg-white chart-right">
+        <ChartComponent />
       </div>
-      <div class=""></div>
+      <div class="col-md-4">
+        <round-chart
+          v-for="(item, index) in rounds"
+          :key="index"
+          :round="item"
+        />
+      </div>
     </div>
-    <div class="card mt-4">
-      <table-component />
-    </div>
-    <div class="card mt-4">
-      <MapComponent />
-    </div>
+    <div class=""></div>
+  </div>
+  <div class="card mt-4">
+    <table-component />
+  </div>
+  <div class="card mt-4">
+    <MapComponent />
+  </div>
 
-    <div class="card mt-4">
-      <table-component />
-    </div>
-    <div class="card mt-4">
-      <table-component />
-    </div>
+  <div class="card mt-4">
+    <table-component />
+  </div>
+  <div class="card mt-4">
+    <table-component />
   </div>
 </template>
 
 <script>
 import CardCoponent from "./component/CardCoponent.vue";
-import FormComponent from "./component/FormComponent.vue";
+import SelectComponent from "./component/SelectComponent.vue";
 import ChartComponent from "./component/ChartComponent.vue";
 import RoundChart from "./component/RoundChart.vue";
 import TableComponent from "./component/TableComponent.vue";
@@ -63,7 +59,7 @@ import MapComponent from "./component/MapComponent.vue";
 export default {
   components: {
     CardCoponent,
-    FormComponent,
+    SelectComponent,
     ChartComponent,
     RoundChart,
     TableComponent,
@@ -98,7 +94,7 @@ export default {
           growthCard: "1 so với tháng trước",
         },
       ],
-      formList: [
+      selectList: [
         {
           nameForm: "Năm",
           valueForm: "2023",
@@ -132,6 +128,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.body-page{
+  margin: 20px 40px;
+} 
 .card-header {
   justify-content: space-between;
 }

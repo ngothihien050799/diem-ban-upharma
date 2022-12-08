@@ -4,6 +4,7 @@
 
     <div class="main-container">
       <the-header />
+      <!-- <the-tags/> -->
       <router-view />
     </div>
   </div>
@@ -12,8 +13,9 @@
 <script>
 import TheHeader from "./component/TheHeader.vue";
 import TheSidebar from "./component/TheSidebar.vue";
+import TheTags from './component/TheTags.vue';
 export default {
-  components: { TheHeader, TheSidebar },
+  components: { TheHeader, TheSidebar, TheTags },
 };
 </script>
 
