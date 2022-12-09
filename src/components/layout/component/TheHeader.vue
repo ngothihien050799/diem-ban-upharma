@@ -1,12 +1,21 @@
 <template>
   <div class="header d-flex">
     <div class="header-left">
-      <i class="header-left-icon fa-solid fa-bars"></i>
+        
+      <span @click="changeSidebar">
+      <i
+        class="header-left-icon fa-solid fa-bars"
+      ></i></span>
       <span class="header-left-text">
         <span>Trang chủ </span>
         <span>/ Thống kê</span>
       </span>
     </div>
+    <!-- <p>Tuổi của tôi :{{ userAge }}</p>
+    <button type="button" class="btn btn-success" @click="editTuoi">
+      Thay đổi
+    </button> -->
+
     <div class="header-right d-flex ms-auto">
       <i class="icon search fa-solid fa-magnifying-glass"></i>
       <i class="icon fullscreen fa-solid fa-arrows-up-down-left-right"></i>
@@ -32,14 +41,29 @@
     </div>
     <div class="nav"></div>
   </div>
-  <!-- <ChinhHi /> -->
 </template>
 
 <script>
-// import ChinhHi from "../Main.vue";
 export default {
-  components: {
-    // ChinhHi,
+  props: {
+    userAge: Number,
+  },
+  data() {
+    return {
+      age: 0,
+    };
+  },
+  methods: {
+    editTuoi() {
+     
+    },
+    changeSidebar() {
+      let sidebar = document.getElementById("sidebar");
+      let mainPage = document.getElementById("main-page");
+      if (sidebar.style.display != "none") sidebar.style.display = "none";
+      else sidebar.style.display = "block";
+      mainPage.style.borderRadius = "0";
+    },
   },
 };
 </script>
@@ -58,6 +82,7 @@ export default {
       width: 18px;
       height: 18px;
       color: rgb(38, 141, 38);
+      cursor: pointer;
     }
     &-text {
       font-size: 14px;
@@ -74,7 +99,7 @@ export default {
   &-right {
     line-height: 50px;
     margin-right: 10px;
-    
+
     .icon {
       width: 18px;
       height: 18px;

@@ -3,8 +3,11 @@
     <div class="title">
       <img class="tile-logo" src="@/assets/logo.webp" alt="" />
       <p class="title-text">Điểm bán Upharma</p>
+    
     </div>
+    
     <div class="menu">
+      
       <div class="menu-item" v-for="(item, index) in menuLst" :key="index">
         <router-link :to="item.path">
           <span class="icon" v-html="item.icon"></span>
@@ -15,6 +18,7 @@
           <span class="text">Thống kê</span>
         </a> -->
       </div>
+     
     </div>
   </div>
 </template>
@@ -86,6 +90,9 @@ export default {
         },
       ],
     };
+  },
+   props:{
+    userAge: Number
   },
 };
 </script>

@@ -1,10 +1,12 @@
 <template>
   <div class="layout-container d-flex">
-    <div class="sidebar">
-      <the-sidebar />
+    <div class="sidebar" id="sidebar">
+      <the-sidebar :userAge="age"/>
     </div>
-    <div class="main-page">
-      <the-header />
+    <div class="main-page" id="main-page">
+      <the-header :userAge="age" 
+      @tuoiduocSua="tuoiduocSua"
+      />
       <!-- <the-tags/> -->
       <router-view />
     </div>
@@ -17,7 +19,22 @@ import TheSidebar from "./component/TheSidebar.vue";
 import TheTags from "./component/TheTags.vue";
 export default {
   components: { TheHeader, TheSidebar, TheTags },
+  data(){
+    return{
+      openSidebar: "true",
+      age:18
+    }
+  },
+  methods:{
+    showSidebar(){
+      this.openSidebar = !this.openSidebar;
+    },
+    tuoiduocSua(val){
+      this.age = val;
+    }
+  }
 };
+
 </script>
 
 <style lang="scss" scoped>

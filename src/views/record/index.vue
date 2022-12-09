@@ -2,14 +2,18 @@
   <div class="wrapper">
     <div class="hoso-hearder d-flex">
       <div class="hoso-hearder-search">
-        <input
-          type="hoso-hearder-search-input"
-          id="search"
-          placeholder="Tìm kiếm..."
-        />
-        <a class="hoso-hearder-search-icon" href=""
-          ><i class="search fa-solid fa-magnifying-glass"></i
-        ></a>
+        <form method="get" action="">
+          <div class="hoso-hearder-search-text">
+            <div class="td">
+              <input type="text" placeholder=" Tìm kiếm..." required />
+            </div>
+            <div class="td" id="s-cover">
+              <button type="submit">
+                <i class="icon search fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
 
       <button class="hoso-hearder-add btn">
@@ -28,7 +32,7 @@
       </div>
     </div>
     <div class="table col-sm-12 d-flex mt-3">
-      <table class="table table-hover ">
+      <table class="table table-striped table-hover bg-white">
         <thead>
           <tr class="table-title">
             <th scope="col"></th>
@@ -43,12 +47,8 @@
             <th scope="col ">Thời gian</th>
           </tr>
         </thead>
-        <tbody
-          class="table-boby bg-white "
-          v-for="(item, index)  in tableLst"
-          :key="index"
-        >
-          <tr>
+        <tbody class="table-boby bg-white">
+          <tr v-for="(item, index) in tableLst" :key="index">
             <th scope="row">{{ item.Stt }}</th>
             <td>
               <router-link :to="item.path + item.Id">
@@ -80,7 +80,7 @@
             </td>
             <td>{{ item.Congviec }}</td>
             <td>
-              <div class=" d-flex align-items-center">
+              <div class="d-flex align-items-center">
                 <h6>{{ item.Tiendo }}</h6>
               </div>
               <div
@@ -223,12 +223,29 @@ export default {
   .hoso-hearder {
     margin: 30px 40px 15px;
     &-search {
-      width: 250px;
-      height: 35px;
-      
-    }
-    &-input {
-      border: 0.2px solid #909d8d;
+      border: 0.5px solid #909d8d;
+      border-radius: 5px;
+      overflow: hidden;
+
+      &-text {
+        display: flex;
+        input {
+          width: 250px;
+          height: 35px;
+          border: none;
+        }
+        button {
+          height: 35px;
+          background: #d8e0dd;
+          border: none;
+          width: 50px;
+        }
+      }
+      //   width: 250px;
+      //   height: 35px;
+      // }
+      // &-input {
+      //   border: 0.2px solid #909d8d;
     }
     .icon {
       border: #1d974a;
@@ -261,24 +278,19 @@ export default {
     }
   }
   .table {
-      align-items: center;
-    
+    align-items: center;
+
     &-title {
       background: #1d974a;
       color: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       // text-align: center;
-     
     }
-    &-body{
-      tr:nth-child(even){
-        background: #000;
-      }
-    }
+    // &-body {
+    //   tr:nth-child(even) {
+    //     background: #000;
+    //   }
+    // }
   }
-  
 }
-
-    
-  
 </style>

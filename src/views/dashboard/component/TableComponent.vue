@@ -1,9 +1,8 @@
 <template>
   <div class="table">
-   
     <div class="table-list row d-flex">
       <div class="table-list-title col-sm-12">
-        <table class="table table-hover bg-white rounded">
+        <table class="table table-striped table-hover bg-white">
           <thead>
             <tr class="table-th">
               <th scope="col">Top</th>
@@ -81,12 +80,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      itemLst: [{}],
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .table {
-  
   &-list {
     padding: 20px;
     .table {
