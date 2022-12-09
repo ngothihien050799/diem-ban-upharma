@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="title">
-      <img class="tile-logo" src="../../../assets/logo.webp" alt="" />
+      <img class="tile-logo" src="@/assets/logo.webp" alt="" />
       <p class="title-text">Điểm bán Upharma</p>
     </div>
     <div class="menu">
@@ -33,19 +33,19 @@ export default {
         {
           value: 2,
           label: "Hồ sơ",
-          icon: "<span class='material-symbols-outlined icon'> description </span>",
+          icon: "<i class='fa-regular fa-file-lines icon'></i>",
           path: "/ho-so",
         },
         {
           value: 3,
           label: "Công việc",
-          icon: " <span class='material-symbols-outlined icon'> business_center </span>",
+          icon: "<i class='fa-regular fa-suitcase icon'></i>",
           path: "/",
         },
         {
           value: 4,
           label: "Khu vực",
-          icon: " <span class='material-symbols-outlined icon'> home_work </span>",
+          icon: "<i class='fa-regular fa-building icon'></i>",
           path: "/",
         },
         {
@@ -63,7 +63,7 @@ export default {
         {
           value: 7,
           label: "Lịch KT",
-          icon: "<span class='material-symbols-outlined icon'> calendar_month </span>",
+          icon: "<i class='fa-regular fa-calendar-days icon'></i>",
           path: "/",
         },
         {
@@ -98,10 +98,10 @@ export default {
   .title {
     display: flex;
     align-items: center;
-    margin: 10px;
+    margin-top: 10px;
     color: #fff;
     font-family: "Dancing Script", cursive;
-    font-size: 22px;
+    font-size: 20px;
     border-bottom: solid 1px #fff;
     padding-bottom: 10px;
 
@@ -118,22 +118,22 @@ export default {
   .menu {
     font-family: "Roboto", sans-serif;
     &-item {
-      margin: 30px 20px;
+      margin: 10px;
 
       a {
         text-decoration: none;
         color: #fff;
         display: flex;
         align-items: center;
-        font-size: 18px;
+        font-size: 14px;
 
         .icon {
            width: 20px;
           height: 20px;
         }
         .text {
-          padding-left: 30px;
-          line-height: 30px;
+          padding-left: 20px;
+          line-height: 50px;
         }
       }
     }

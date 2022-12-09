@@ -1,11 +1,11 @@
 <template>
-  <div class="card-body">
-    <div class="card-title">Top điểm bán có doanh số cao nhất</div>
-    <div class="card-info row d-flex">
-      <div class="card-info-table col-sm-12">
+  <div class="table">
+   
+    <div class="table-list row d-flex">
+      <div class="table-list-title col-sm-12">
         <table class="table table-hover bg-white rounded">
           <thead>
-            <tr class="table-title">
+            <tr class="table-th">
               <th scope="col">Top</th>
               <th scope="col ">Điểm bán</th>
               <th scope="col">Doanh số</th>
@@ -51,19 +51,31 @@
       </div>
     </div>
     <div class="col-sm-12">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
+      <div class="d-flex justify-content-end">
+        <span class="arrow-item">
+          <a class="arrow-link" href="#" tabindex="-1"
+            ><i class="fa-solid fa-angles-left"></i
+          ></a>
+        </span>
+        <span class="arrow-item">
+          <a class="arrow-link" href="#" tabindex="-1"
+            ><i class="fa-solid fa-angle-left"></i
+          ></a>
+        </span>
+        <span class="arrow-item"><a class="arrow-link" href="#">1</a></span>
+        <span class="arrow-item"><a class="arrow-link" href="#">2</a></span>
+        <span class="arrow-item"><a class="arrow-link" href="#">3</a></span>
+        <span class="arrow-item">
+          <a class="arrow-link" href="#"
+            ><i class="fa-solid fa-angle-right"></i
+          ></a>
+        </span>
+        <span class="arrow-item">
+          <a class="arrow-link" href="#"
+            ><i class="fa-solid fa-angles-right"></i
+          ></a>
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -73,30 +85,31 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.card {
-  &-title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 30px;
-    color: #5d695d;
-  }
-  &-info {
-    padding: 10px;
+.table {
+  
+  &-list {
+    padding: 20px;
     .table {
-      &-title {
+      &-th {
         background: #eeeeee;
-        height: 50px;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 30px;
+        font-weight: 600;
+        font-size: 14px;
       }
       td {
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 30px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 25px;
         color: #797575;
       }
+    }
+  }
+  .arrow-item {
+    margin-right: 20px;
+
+    .arrow-link {
+      text-decoration: none;
+      color: #909d8d;
     }
   }
 }

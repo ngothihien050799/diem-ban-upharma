@@ -1,11 +1,18 @@
 <template>
   <div class="wrapper">
-    <div class="box row m-3 d-flex">
-      <div class="box-search d-flex m-3">
-        <input type="box-search-input" id="search" placeholder="Tìm kiếm..." />
-        <button class="box-btn btn fa fa-search"></button>
+    <div class="hoso-hearder d-flex">
+      <div class="hoso-hearder-search">
+        <input
+          type="hoso-hearder-search-input"
+          id="search"
+          placeholder="Tìm kiếm..."
+        />
+        <a class="hoso-hearder-search-icon" href=""
+          ><i class="search fa-solid fa-magnifying-glass"></i
+        ></a>
       </div>
-      <button class="box-add btn m-3">
+
+      <button class="hoso-hearder-add btn">
         <font-awesome-icon icon="fa-regular fa-file-lines" />
         <span> Tạo mới hồ sơ</span>
       </button>
@@ -37,8 +44,8 @@
           </tr>
         </thead>
         <tbody
-          class="table-boby"
-          v-for="(item, index) in tableLst"
+          class="table-boby "
+          v-for="(item, index)  in tableLst"
           :key="index"
         >
           <tr>
@@ -54,7 +61,7 @@
             <td>{{ item.Hoso }}</td>
             <td>
               <div>
-                <b-avatar-group size="60px">
+                <b-avatar-group size="">
                   <b-avatar></b-avatar>
                   <b-avatar text="BV" variant="primary"></b-avatar>
                   <b-avatar
@@ -73,7 +80,7 @@
             </td>
             <td>{{ item.Congviec }}</td>
             <td>
-              <div class="mb-2 d-flex align-items-center">
+              <div class=" d-flex align-items-center">
                 <h6>{{ item.Tiendo }}</h6>
               </div>
               <div
@@ -212,35 +219,43 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   font-family: "Roboto", sans-serif;
-  .box {
+
+  .hoso-hearder {
+    margin: 30px 40px 15px;
     &-search {
-      border: 0.5px solid #909d8d;
-      border-radius: 5px;
-      justify-content: space-between;
-      width: 300px;
+      width: 250px;
+      height: 35px;
+      
+    }
+    &-input {
+      border: 0.2px solid #909d8d;
+    }
+    .icon {
+      border: #1d974a;
     }
     &-add {
+      margin-left: 10px;
       background: linear-gradient(180deg, #6e9e0e 0%, #097732 100%);
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 5px;
-      width: 200px;
+      width: 150px;
       color: #fff;
+      font-size: 14px;
     }
   }
   .tab {
     background: #ffffff;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    height: 58px;
+    height: 40px;
     align-items: center;
     &-menu {
       margin-left: 30px;
-
       &-item {
         text-decoration: none;
-        margin-right: 80px;
+        margin-right: 30px;
         color: #797575;
-        font-weight: 700;
-        font-size: 18px;
+        font-weight: 600;
+        font-size: 14px;
         line-height: 30px;
       }
     }

@@ -1,8 +1,9 @@
 <template>
-  <div class="dashboard-container">
-    <the-sidebar />
-
-    <div class="main-container">
+  <div class="layout-container d-flex">
+    <div class="sidebar">
+      <the-sidebar />
+    </div>
+    <div class="main-page">
       <the-header />
       <!-- <the-tags/> -->
       <router-view />
@@ -13,23 +14,24 @@
 <script>
 import TheHeader from "./component/TheHeader.vue";
 import TheSidebar from "./component/TheSidebar.vue";
-import TheTags from './component/TheTags.vue';
+import TheTags from "./component/TheTags.vue";
 export default {
   components: { TheHeader, TheSidebar, TheTags },
 };
 </script>
 
 <style lang="scss" scoped>
-.dashboard-container {
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-  background-color: #1d974a;
-  min-width: 100vw;
-  min-height: 100vh;
-  .main-container {
+.layout-container {
+  background: #1d974a;
+  .sidebar {
+    width: 280px;
+    min-height: 100vh;
+  }
+  .main-page {
+    width: 100%;
     overflow: hidden;
     background-color: rgb(226, 226, 226);
-    border-radius: 50px 0 0 0;
+    border-radius: 30px 0 0 0;
     box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
   }
 }

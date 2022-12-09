@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="content-main row">
-      <div class="content-main-left col-md-12 col-lg-5">
+      <div class="content-main-left col-md-12 col-lg-4">
         <div class="content-main-left-thongtin card">
           <div class="card-title">Thông tin chung</div>
           <div class="card-info mt-4">
@@ -45,36 +45,40 @@
         </div>
         <div class="content-main-left-thaoluan card">
           <div class="card-title">Thảo luận</div>
-          <div class="input d-flex">
-            <input class="input-mess" type="text" placeholder="Nhập tin nhắn" />
-            <button class="input-send btn btn-success">Gửi</button>
+          <div class="input-thaoluan">
+            <input
+              class="input-mess"
+              type="text"
+              placeholder="Nhập tin nhắn..."
+            />
+            <button class="btn btn-success">Gửi</button>
           </div>
         </div>
       </div>
-      <div class="col-md-12 col-lg-7 content-main-right">
+      <div class="col-md-12 col-lg-8 content-main-right">
         <div class="content-main-right-header row">
-          <div class="col-md-12 col-lg-4 card">
+          <div class="col-md-12 col-lg-3 card">
             <div class="card-info">
               <div class="card-info-value">10</div>
-              <div class="card-info-text">Tổng công việc</div>
+              <div class="card-info-text ">Tổng công việc</div>
             </div>
             <div class="card-icon">
               <i class="fa-solid fa-list-check"></i>
             </div>
           </div>
-          <div class="col-md-12 col-lg-4 card">
+          <div class="col-md-12 col-lg-3 card">
             <div class="card-info">
               <div class="card-info-value">10</div>
-              <div class="card-info-text">Người thực hiện</div>
+              <div class="card-info-text ">Người thực hiện</div>
             </div>
             <div class="card-icon">
               <i class="fa-solid fa-user-group"></i>
             </div>
           </div>
-          <div class="col-md-12 col-lg-4 card">
+          <div class="col-md-12 col-lg-3 card">
             <div class="card-info">
               <div class="card-info-value">10</div>
-              <div class="card-info-text">Ngày thực hiện</div>
+              <div class="card-info-text ">Ngày thực hiện</div>
             </div>
             <div class="card-icon">
               <i class="fa-regular fa-hourglass-half"></i>
@@ -116,32 +120,31 @@ export default {};
 .content {
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  height: 58px;
+  height: 40px;
   align-items: center;
   &-menu {
     margin-left: 30px;
 
     &-item {
       text-decoration: none;
-      margin-right: 80px;
+      margin-right: 20px;
       color: #797575;
-      font-weight: 700;
-      font-size: 18px;
-      line-height: 30px;
+      font-weight: 600;
+      font-size: 14px;
     }
   }
 }
 .content-main {
-  margin: 30px 40px;
+  margin: 30px;
   &-left {
     .card {
-      margin-bottom: 40px;
-      height: 500px;
+      margin-bottom: 20px;
+
       padding: 30px;
       &-title {
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 30px;
+        font-weight: 600;
+        font-size: 20px;
+        border-bottom: 1px solid #000;
       }
       &-info {
         .table {
@@ -151,26 +154,20 @@ export default {};
             }
             &-value {
               color: #000000;
-              font-weight: 700;
-              font-size: 18px;
+              font-weight: 600;
+              font-size: 14px;
               line-height: 30px;
             }
           }
         }
       }
-      .input {
-        position: absolute;
-        bottom: 30px;
-        &-mess {
-          //  width: 700px;
-          border: 0.2px solid #cbcccb;
-          border-radius: 10px;
-          padding-left: 20px;
-        }
-        &-send {
-          margin-left: 20px;
-          font-weight: 700;
+      .input-thaoluan {
+        .input-mess {
           line-height: 30px;
+          padding-left: 5px;
+        }
+        .btn {
+          margin-left: 10px;
         }
       }
     }
@@ -178,41 +175,43 @@ export default {};
   &-right {
     &-header {
       justify-content: space-between;
+      
       .card {
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-direction: initial;
         text-align: center;
-        width: 260px;
-        height: 90px;
-        margin: 0 30px 30px;
+        
+        height: 80px;
+        margin: 0 10px 30px;
         background: linear-gradient(180deg, #1d974a 0%, #4c5612 100%);
         border-radius: 20px;
         color: #ffffff;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 30px;
+        font-weight: 600;
+        font-size: 14px;
+      
         &-icon {
           background: #52bb11;
           border-radius: 50%;
-          width: 45px;
-          height: 45px;
+          width: 40px;
+          height: 40px;
           text-align: center;
-          line-height: 45px;
+          line-height: 40px;
         }
       }
     }
     &-footer {
-      margin-bottom: 40px;
+     
 
       padding: 30px;
       .card-title {
-        font-weight: 700;
-        font-size: 26px;
+        font-weight: 600;
+        font-size: 20px;
         line-height: 30px;
         justify-content: space-between;
         margin-bottom: 30px;
+        border-bottom: 1px solid #000;
       }
       .card-noidung {
         justify-content: space-between;
@@ -221,11 +220,11 @@ export default {};
           background: linear-gradient(180deg, #6e9e0e 0%, #097732 100%);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           border-radius: 20px;
-          width: 600px;
-          height: 70px;
-          font-weight: 700;
-          font-size: 24px;
-          line-height: 30px;
+          width: 500px;
+          height: 50px;
+          font-weight: 600;
+          font-size: 16px;
+         
           /* identical to box height, or 125% */
 
           display: flex;

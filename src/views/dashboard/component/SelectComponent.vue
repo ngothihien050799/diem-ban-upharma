@@ -1,6 +1,6 @@
 <template>
-  <div v-if="SelectItem" class="form ">
-    <select class="form-select custom-select custom-select-sm">
+  <div v-if="SelectItem" class="form">
+    <select class="form-select">
       <option selected>{{ SelectItem.nameForm }}</option>
       <option value="1">{{ SelectItem.valueForm }}</option>
       <option value="2">2021</option>
@@ -16,18 +16,17 @@ export default {
       type: Object,
     },
   },
-  created(){
+  created() {
     console.log(this.FormItem);
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.form-select{
+.form-select {
   border: 1px solid #d2d4d3;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 30px;
+  font-weight: 500;
   color: #838881;
+  height: 40px;
 }
 </style>

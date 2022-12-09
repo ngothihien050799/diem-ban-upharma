@@ -1,19 +1,15 @@
 <template>
-  <nav class="d-flex header">
-    <div class="d-flex header-left">
+  <div class="header d-flex">
+    <div class="header-left">
       <i class="header-left-icon fa-solid fa-bars"></i>
-
-      <div class="breadcrumb">
-        <a href="" class="breadcrumb-item">Trang chủ</a>
-        <span class="breadcrumb-item active item" aria-current="page"
-          >Thống kê</span
-        >
-      </div>
+      <span class="header-left-text">
+        <span>Trang chủ </span>
+        <span>/ Thống kê</span>
+      </span>
     </div>
-    <div class="header-right d-flex ms-auto p-10">
-      <i class="icon search fa-solid fa-magnifying-glass p-2"></i>
-      <i class="icon fullscreen fa-solid fa-arrows-up-down-left-right p-2"></i>
-
+    <div class="header-right d-flex ms-auto">
+      <i class="icon search fa-solid fa-magnifying-glass"></i>
+      <i class="icon fullscreen fa-solid fa-arrows-up-down-left-right"></i>
       <a
         class="logout"
         href="#"
@@ -21,7 +17,7 @@
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img class="img-logo" src="../../../assets/logo.webp" alt="" />
+        <img class="img-logo" src="@/assets/logo.webp" alt="" />
       </a>
 
       <ul class="dropdown-menu">
@@ -35,7 +31,7 @@
       </ul>
     </div>
     <div class="nav"></div>
-  </nav>
+  </div>
   <!-- <ChinhHi /> -->
 </template>
 
@@ -50,20 +46,21 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  height: 75px;
+  height: 50px;
   border-bottom: 1px solid #d4d8d6;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  line-height: 50px;
   &-left {
     &-icon {
-      padding-top: 25px;
       padding-left: 30px;
       padding-right: 10px;
-      font-size: 22px;
+      width: 18px;
+      height: 18px;
       color: rgb(38, 141, 38);
     }
-    .breadcrumb {
-      padding-top: 22px;
-      font-size: 18px;
+    &-text {
+      font-size: 14px;
       &-item {
         text-decoration: none;
         color: #000;
@@ -75,16 +72,19 @@ export default {
     }
   }
   &-right {
-    margin-top: 20px;
-    margin-right: 20px;
+    line-height: 50px;
+    margin-right: 10px;
+    
     .icon {
-      padding-right: 20px !important;
-      padding-top: 12px !important;
+      width: 18px;
+      height: 18px;
+      margin-top: 15px;
+      margin-right: 10px;
     }
   }
   .img-logo {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     border-radius: 5px;
   }
 }

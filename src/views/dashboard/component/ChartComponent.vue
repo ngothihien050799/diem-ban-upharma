@@ -1,6 +1,6 @@
 <template>
-  <h4 class="card-title">Phân tích doanh số</h4>
-  <div class="bar-chart">
+  <h4 class="chart-title">Phân tích doanh số</h4>
+  <div class="chart-bar">
     <canvas id="myChart"> </canvas>
   </div>
 </template>
@@ -14,38 +14,26 @@ export default {
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: [
-          "Tháng 1",
-          "Tháng 2",
-          "Tháng 3",
-          "Tháng 4",
-          "Tháng 5",
-          "Tháng 6",
-          "Tháng 7",
-          "Tháng 8",
-          "Tháng 9",
-          "Tháng 10",
-          "Tháng 11",
-          "Tháng 12",
-        ],
+        labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
         datasets: [
           {
             type: "line",
             label: "Doanh số (triệu đồng)",
             data: [
-              450, 500, 550, 450, 600, 850, 900, 600.5, 500, 700, 900, 600,
+              450, 500, 550, 450, 600, 850, 840, 600.5, 500, 700, 850, 600,
             ],
             borderColor: "#F57E25",
             backgroundColor: "#F57E25",
+            borderWidth: 1.5,
             yAxisID: "y1",
           },
           {
             type: "bar",
             label: "Điểm bán",
             data: [12, 12, 12, 14, 14, 14, 15, 18, 22, 20, 20, 20],
-            borderColor: "#1d974a",
-            backgroundColor: "#1d974a",
-            barPercentage: 0.5,
+            borderColor: "#0C9B1A",
+            backgroundColor: "#0C9B1A",
+            barPercentage: 0.4,
             yAxisID: "y",
           },
         ],
@@ -88,13 +76,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-title {
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 30px;
+.chart-title {
+  font-weight: 600;
+  font-size: 22px;
   color: #5d695d;
 }
-// .bar-char{
-//   max-height: 600px;
-// }
+.chart-bar{
+  padding: 10px 0px;
+}
 </style>

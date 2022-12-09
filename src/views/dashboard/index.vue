@@ -1,51 +1,53 @@
 <template>
-  <div class="body-page">
-    <div class="row">
+  <div class="dashboard">
+    <div class="dashboard-select row">
       <div
-        class="col-lg-2 col-md-12"
+        class="dashboard-select-item"
         v-for="(item, index) in selectList"
         :key="index"
       >
         <SelectComponent :SelectItem="item" />
       </div>
-      <!-- <div class="col-lg-2 ">
-          <FormComponent :FormItem="formList[1]" />
-        </div>
-        <div class="col-lg-2 ">
-          <FormComponent :FormItem="formList[2]" />
-        </div> -->
     </div>
-    <div class="row mt-4">
-      <div class="col-md-4" v-for="(item, index) in cardList" :key="index">
+    <div class="dashboard-doanhthu row">
+      <div class="col-lg-4" v-for="(item, index) in cardList" :key="index">
         <CardCoponent :CardItem="item" />
       </div>
     </div>
-    <div class="row mt-4">
-      <div class="col-sm-12 col-md-12 col-lg-8 bg-white chart-right">
+    <div class="dashboard-chart row">
+      <div class="col-sm-12 col-md-12 col-lg-8 bg-white dashboard-chart-left">
         <ChartComponent />
       </div>
-      <div class="col-md-4">
-        <round-chart
-          v-for="(item, index) in rounds"
-          :key="index"
-          :round="item"
-        />
+      <div class="dashboard-chart-right col-lg-4">
+        <div>
+          <round-chart
+            class="dashboard-chart-right-item col-lg-12"
+            v-for="(item, index) in rounds"
+            :key="index"
+            :round="item"
+          />
+        </div>
       </div>
     </div>
-    <div class=""></div>
-  </div>
-  <div class="card mt-4">
-    <table-component />
-  </div>
-  <div class="card mt-4">
-    <MapComponent />
-  </div>
 
-  <div class="card mt-4">
-    <table-component />
-  </div>
-  <div class="card mt-4">
-    <table-component />
+    <div class="dashboard-table row">
+      <div class="dashboard-table-top col-lg-12 card mt-4">
+        <div class="table-title">Top điểm bán có doanh số cao nhất</div>
+        <table-component />
+      </div>
+      <div class="col-lg-12 card mt-4">
+        <MapComponent />
+      </div>
+
+      <div class="col-lg-12 card mt-4">
+        <div class="table-title">Danh sách hồ sơ</div>
+        <table-component />
+      </div>
+      <div class="col-lg-12 card mt-4">
+        <div class="table-title">Công việc cần xử lý</div>
+        <table-component />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -128,14 +130,39 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.body-page{
-  margin: 20px 40px;
-} 
+.dashboard {
+  margin: 30px 40px;
+  &-select {
+    &-item {
+      width: 250px;
+    }
+  }
+  &-doanhthu {
+    margin-top: 20px;
+  }
+  &-chart {
+    &-left {
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    &-right {
+      &-item {
+        background: #fff;
+        margin-top: 20px;
+      }
+    }
+  }
+}
 .card-header {
   justify-content: space-between;
 }
-.chart-right {
-  border-radius: 20px;
-  padding: 30px 40px;
+.table {
+  &-title {
+    padding: 20px 10px 0;
+    font-weight: 600;
+    font-size: 22px;
+    color: #5d695d;
+  }
 }
 </style>

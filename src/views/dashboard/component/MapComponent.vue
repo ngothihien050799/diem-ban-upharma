@@ -1,8 +1,8 @@
 <template>
-  <div class="row m-5 map">
+  <div class="map row">
     <div class="map-header">ĐỘ PHỦ NHÀ THUỐC UPHARMA</div>
     <div class="map-item col-sm-12 col-md-8">
-      <l-map style="height: 700px" :zoom="zoom" :center="center">
+      <l-map style="height: 300px" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <l-marker :lat-lng="markerLatLng"></l-marker>
       </l-map>
@@ -37,11 +37,13 @@ export default {
 
 <style lang="scss" scoped>
 .map{
-  height: 700px;
+  
+  padding: 20px;
   &-header {
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 50px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  margin-bottom: 20px;
   /* identical to box height, or 100% */
 
   text-align: center;
@@ -55,7 +57,10 @@ export default {
 
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   &-item{
-    height: 900px !important;
+  margin-bottom: 30px !important;
+  }
+  &-list{
+    text-align:center;
   }
 }
 }
