@@ -98,11 +98,12 @@ export default {
   background-attachment: fixed;
 
   &-logo {
-    width: 150px;
-    height: 150px;
-    margin-top: 140px;
+    width: 100px;
+    height: 100px;
+    margin-top: 100px;
     filter: drop-shadow(15px -3px 4px rgba(0, 0, 0, 0.2));
     border-radius: 20px;
+    margin-bottom: 20px;
   }
 
   &-title {
@@ -111,15 +112,16 @@ export default {
     font-size: 50px;
     line-height: 50px;
     color: #fff;
+    margin-bottom: 50px;
   }
 
   &-form {
-    width: 480px;
-    background: rgba(124, 179, 76, 0.432);
+    width: 460px;
+    background: rgba(155, 172, 141, 0.432);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    padding: 40px 0;
+    padding: 30px 0;
     font-family: "Roboto", sans-serif;
     .icon {
       height: 25px;
