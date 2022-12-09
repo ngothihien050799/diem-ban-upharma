@@ -13,7 +13,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    //redirect: "/thong-ke",
+    redirect: "/thong-ke",
     component: Layer,
   },
   {
