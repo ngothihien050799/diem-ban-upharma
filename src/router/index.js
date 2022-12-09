@@ -24,6 +24,7 @@ const routes = [
       {
         path: "thong-ke",
         component: Dashboard,
+        alias:"/thong-ke"
       },
     ],
   },
