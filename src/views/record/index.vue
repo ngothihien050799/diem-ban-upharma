@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="table col-sm-12 d-flex mt-3">
-      <table class="table table-hover table-striped bg-white">
+      <table class="table table-hover ">
         <thead>
           <tr class="table-title">
             <th scope="col"></th>
@@ -44,7 +44,7 @@
           </tr>
         </thead>
         <tbody
-          class="table-boby "
+          class="table-boby bg-white "
           v-for="(item, index)  in tableLst"
           :key="index"
         >
@@ -261,19 +261,24 @@ export default {
     }
   }
   .table {
+      align-items: center;
+    
     &-title {
       background: #1d974a;
       color: #ffffff;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      th {
-        align-items: center;
+      // text-align: center;
+     
+    }
+    &-body{
+      tr:nth-child(even){
+        background: #000;
       }
     }
   }
-  .table-body {
-    tr:hover {
-      background-color: #097732 !important;
-    }
-  }
+  
 }
+
+    
+  
 </style>
