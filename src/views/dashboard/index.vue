@@ -58,6 +58,8 @@ import ChartComponent from "./component/ChartComponent.vue";
 import RoundChart from "./component/RoundChart.vue";
 import TableComponent from "./component/TableComponent.vue";
 import MapComponent from "./component/MapComponent.vue";
+import Cookies from "js-cookie";
+
 export default {
   components: {
     CardCoponent,
@@ -126,12 +128,15 @@ export default {
       ],
     };
   },
+  created() {
+    console.log("TOken",Cookies.get("Token")); // Lấy token lưu trong cookies
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .dashboard {
-  margin: 30px 40px;
+  margin: 20px 45px;
   &-select {
     &-item {
       width: 250px;

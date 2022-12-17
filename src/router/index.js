@@ -1,9 +1,12 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory,createWebHashHistory ,createMemoryHistory } from "vue-router";
 import Login from "@/views/login/index.vue";
 import Layer from "@/components/layout/index.vue";
 import Dashboard from "@/views/dashboard/index.vue";
-import Record from "@/views/record/index.vue";
+import Record from "@/views/brief/index1.vue";
 import Detail from "@/views/jobdetails/index.vue";
+import NotFound from "@/views/404/index"
+import Contact from "@/views/contact/index.vue";
+import Area from "@/views/area/index.vue"
 const routes = [
   {
     path: "/login",
@@ -13,26 +16,20 @@ const routes = [
   {
     path: "/",
     name: "home",
-    redirect: "/thong-ke",
+    redirect:"/thong-ke",
     component: Layer,
+    //alias: ["/login"]
   },
   {
     path: "/",
-    name: "thong-ke",
+    name: "diem-ban",
     component: Layer,
     children: [
       {
         path: "thong-ke",
         component: Dashboard,
-        alias:"/thong-ke"
+        alias: "/thong-ke",
       },
-    ],
-  },
-  {
-    path: "/",
-    name: "ho-so",
-    component: Layer,
-    children: [
       {
         path: "ho-so",
         component: Record,
@@ -41,12 +38,36 @@ const routes = [
         path: "thong-tin-ho-so/:id",
         component: Detail,
       },
+      {
+        path: "khu-vuc",
+        component: Area,
+      },
+      {
+        path: "lien-he",
+        component: Contact,
+      }
     ],
   },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+  // {
+  //   path: "/",
+  //   name: "ho-so",
+  //   component: Layer,
+  //   children: [
+  //     {
+  //       path: "ho-so",
+  //       component: Record,
+  //     },
+  //     {
+  //       path: "thong-tin-ho-so/:id",
+  //       component: Detail,
+  //     },
+  //   ],
+  // },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory (process.env.BASE_URL),
   routes,
 });
 

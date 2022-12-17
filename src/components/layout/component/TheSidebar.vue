@@ -3,11 +3,9 @@
     <div class="title">
       <img class="tile-logo" src="@/assets/logo.webp" alt="" />
       <p class="title-text">Điểm bán Upharma</p>
-    
     </div>
-    
+
     <div class="menu">
-      
       <div class="menu-item" v-for="(item, index) in menuLst" :key="index">
         <router-link :to="item.path">
           <span class="icon" v-html="item.icon"></span>
@@ -18,7 +16,6 @@
           <span class="text">Thống kê</span>
         </a> -->
       </div>
-     
     </div>
   </div>
 </template>
@@ -43,25 +40,25 @@ export default {
         {
           value: 3,
           label: "Công việc",
-          icon: "<i class='fa-regular fa-suitcase icon'></i>",
+          icon: "<i class='fa-solid fa-briefcase'></i>",
           path: "/",
         },
         {
           value: 4,
           label: "Khu vực",
-          icon: "<i class='fa-regular fa-building icon'></i>",
-          path: "/",
+          icon: "<i class='fa-solid fa-map-location-dot'></i>",
+          path: "/khu-vuc",
         },
         {
           value: 5,
           label: "Liên hệ",
           icon: " <i class='fa-solid fa-phone icon'></i>",
-          path: "/",
+          path: "/lien-he",
         },
         {
           value: 6,
           label: "Điểm bán",
-          icon: "<i class='fa-solid fa-location-dot icon'></i>",
+          icon: "<i class='fa-solid fa-house-medical-flag icon'></i>",
           path: "/",
         },
         {
@@ -90,9 +87,6 @@ export default {
         },
       ],
     };
-  },
-   props:{
-    userAge: Number
   },
 };
 </script>
@@ -125,18 +119,21 @@ export default {
   .menu {
     font-family: "Roboto", sans-serif;
     &-item {
-      margin: 10px;
+      margin-top: 10px;
+      margin-right: 10px;
 
       a {
         text-decoration: none;
         color: #fff;
         display: flex;
         align-items: center;
-        font-size: 14px;
-
+        font-size: 16px;
+        // font-weight: bold;
         .icon {
-           width: 20px;
+          width: 20px;
           height: 20px;
+          display: block;
+          margin-left: 15px;
         }
         .text {
           padding-left: 20px;
@@ -144,6 +141,14 @@ export default {
         }
       }
     }
+  }
+}
+a:hover {
+  background-color: white;
+  border-radius: 5px;
+  font-weight: 600;
+  span {
+    color: #1d974a;
   }
 }
 @media screen and (max-width: 1920px) {

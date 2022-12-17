@@ -47,8 +47,8 @@ export default {
   .main-page {
     width: 100%;
     overflow: hidden;
-    background-color: rgb(226, 226, 226);
-    border-radius: 30px 0 0 0;
+    background-color: #e5e9e5;
+    // border-radius: 30px 0 0 0;
     box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
   }
 }

@@ -46,34 +46,54 @@
 </template>
 
 <script>
+import { userLogin } from "@/api/user";
+import { ElNotification } from "element-plus";
+import Cookies from "js-cookie";
 export default {
   data() {
     return {
       input: {
         username: "",
-        password: "1",
+        password: "",
       },
-      username: "0349019388",
-      password: "123",
     };
   },
   methods: {
     handleLogin() {
       this.ValidatePhoneNumber(this.input.username);
-      // console.log(this.ValidatePhoneNumber(this.input.username));
-      // console.log(this.input.username, this.input.password);
       if (this.ValidatePhoneNumber(this.input.username)) {
-        if (
-          this.input.username == this.username &&
-          this.input.password == this.password
-        ) {
-          //   alert("Đăng nhập thành công");
-          this.$router.push("/thong-ke");
-        } else {
-          alert("Tài khoản hoặc mật khẩu không chính xác!");
-        }
+        // if (
+        //   this.input.username == this.username &&
+        //   this.input.password == this.password
+        // ) {
+        //   //   alert("Đăng nhập thành công");
+        //   this.$router.push("/thong-ke");
+        // } else {
+        //   alert("Tài khoản hoặc mật khẩu không chính xác!");
+        // }
+        const req = {
+          UserName: this.input.username,
+          Password: this.input.password,
+        };
+        userLogin(req).then((res) => {
+          if (res.RespCode == 0) {
+            this.$router.push("/thong-ke");
+            Cookies.set("Token", res.Token); // Lưu token vào trong Cookies
+            Cookies.set("UserName", this.input.username); // Lưu username vào trong Cookies
+          } else {
+            ElNotification({
+              title: "Xảy ra lỗi",
+              message: res.RespText,
+              type: "error",
+            });
+          }
+        });
       } else {
-        alert("Tài khoản không hợp lệ!");
+        ElNotification({
+          title: "Xảy ra lỗi",
+          message: "Tài khoản không hợp lệ",
+          type: "error",
+        });
       }
     },
     ValidatePhoneNumber(phone) {

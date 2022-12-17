@@ -213,6 +213,9 @@ export default {
       ],
     };
   },
+  // methods:{
+  //   getDocumentList
+  // }
 };
 </script>
 
@@ -279,7 +282,6 @@ export default {
   }
   .table {
     align-items: center;
-
     &-title {
       background: #1d974a;
       color: #ffffff;

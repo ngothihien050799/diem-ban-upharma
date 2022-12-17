@@ -1,20 +1,14 @@
 <template>
   <div class="header d-flex">
     <div class="header-left">
-        
       <span @click="changeSidebar">
-      <i
-        class="header-left-icon fa-solid fa-bars"
-      ></i></span>
+        <i class="header-left-icon fa-solid fa-bars"></i
+      ></span>
       <span class="header-left-text">
         <span>Trang chủ </span>
         <span>/ Thống kê</span>
       </span>
     </div>
-    <!-- <p>Tuổi của tôi :{{ userAge }}</p>
-    <button type="button" class="btn btn-success" @click="editTuoi">
-      Thay đổi
-    </button> -->
 
     <div class="header-right d-flex ms-auto">
       <i class="icon search fa-solid fa-magnifying-glass"></i>
@@ -50,19 +44,16 @@ export default {
   },
   data() {
     return {
-      age: 0,
+      
     };
   },
   methods: {
-    editTuoi() {
-     
-    },
     changeSidebar() {
       let sidebar = document.getElementById("sidebar");
       let mainPage = document.getElementById("main-page");
       if (sidebar.style.display != "none") sidebar.style.display = "none";
       else sidebar.style.display = "block";
-      mainPage.style.borderRadius = "0";
+      // mainPage.style.borderRadius = "0";
     },
   },
 };
@@ -70,11 +61,11 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  height: 50px;
+  height: 60px;
   border-bottom: 1px solid #d4d8d6;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
   font-size: 14px;
-  line-height: 50px;
+  line-height: 60px;
   &-left {
     &-icon {
       padding-left: 30px;
@@ -97,7 +88,7 @@ export default {
     }
   }
   &-right {
-    line-height: 50px;
+    line-height: 60px;
     margin-right: 10px;
 
     .icon {
