@@ -22,7 +22,12 @@
       </button>
     </div>
     <div class="khuvuc-table">
-      <el-table :data="tableData" stripe style="width: 100%">
+      <el-table
+        class="khuvuc-table-custom"
+        :data="tableData"
+        stripe
+        style="width: 100%"
+      >
         <el-table-column type="index" label="" width="40" />
         <el-table-column prop="" label="" width="40"
           ><i
@@ -141,6 +146,18 @@ export default {
       width: 150px;
       color: #fff;
       font-size: 14px;
+    }
+  }
+}
+</style>
+<style lang="scss">
+.khuvuc-table-custom {
+  .el-table__header-wrapper {
+    th {
+      background: #1d974a !important;
+      border-bottom: none !important;
+      color: white;
+      font-size: 16px;
     }
   }
 }

@@ -1,5 +1,28 @@
 <template>
-  <el-table :data="tableData" style="width: 100%">
+<div class="wrapper contact">
+  <div class="contact-hearder d-flex">
+    <div class="contact-hearder-search">
+      <form method="get" action="">
+        <div class="contact-hearder-search-text">
+          <div class="td">
+            <input type="text" placeholder=" Tìm kiếm..." required />
+          </div>
+          <div class="td" id="s-cover">
+            <button type="submit">
+              <i class="icon search fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <button class="contact-hearder-add btn">
+      <font-awesome-icon icon="fa-regular fa-file-lines" />
+      <span> Tạo mới liên hệ</span>
+    </button>
+  </div>
+
+  <el-table class="contact-table" :data="tableData" style="width: 100%">
     <el-table-column type="index" label="STT" width="60" />
     <el-table-column prop="" label="" width="40"
       ><i
@@ -27,6 +50,8 @@
       ><Delete style="width: 1em; height: 1em; margin-right: 8px; color: red" />
     </el-table-column>
   </el-table>
+</div>
+
 </template>
 
 <script>
@@ -42,13 +67,13 @@ export default {
   methods: {
     fetchData() {
       const req = {
-       Username: Cookies.get("UserName"),
+        Username: Cookies.get("UserName"),
         Token: Cookies.get("Token"),
         Search: "",
         PageNumber: 1,
         RowspPage: 100,
-       
-      }; console.log(req);
+      };
+      console.log(req);
       getEmployeeList(req).then((res) => {
         console.log(res);
         if (res.RespCode == 0) {
@@ -83,7 +108,58 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.contact {
+  font-family: "Roboto", sans-serif;
+  margin: 15px;
+  &-hearder {
+    margin: 15px 0px;
+    &-search {
+      border: 0.5px solid #909d8d;
+      border-radius: 5px;
+      overflow: hidden;
+
+      &-text {
+        display: flex;
+        input {
+          width: 250px;
+          height: 35px;
+          border: none;
+        }
+        button {
+          height: 35px;
+          background: #d8e0dd;
+          border: none;
+          width: 50px;
+        }
+      }
+    }
+    .icon {
+      border: #1d974a;
+    }
+    &-add {
+      margin-left: 10px;
+      background: linear-gradient(180deg, #6e9e0e 0%, #097732 100%);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+      width: 150px;
+      color: #fff;
+      font-size: 14px;
+    }
+  }
+}
 .file {
   text-align: center !important;
+}
+</style>
+<style lang="scss">
+.contact-table {
+  .el-table__header-wrapper {
+    th {
+      background-color: #1d974a !important;
+      border-bottom: none !important;
+      color: white;
+      font-size: 16px;
+    }
+  }
 }
 </style>

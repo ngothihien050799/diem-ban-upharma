@@ -146,11 +146,20 @@ export default {
 a:hover {
   background-color: white;
   border-radius: 5px;
+  // font-weight: 600;
+  span {
+    color: #1d974a;
+  }
+}
+a:focus {
+  background-color: white;
+  border-radius: 5px;
   font-weight: 600;
   span {
     color: #1d974a;
   }
 }
+
 @media screen and (max-width: 1920px) {
   .container {
     font-size: 14px;

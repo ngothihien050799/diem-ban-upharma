@@ -22,9 +22,9 @@
       </button>
     </div>
 
-    <div class="table col-sm-12 d-flex mt-3">
+    <div class="hoso-table">
       <el-table
-        class="table-custom"
+        class="hoso-table-custom"
         :data="tableData"
         stripe
         style="width: 100%"
@@ -124,7 +124,7 @@ export default {
   font-family: "Roboto", sans-serif;
   margin: 15px;
   .hoso-hearder {
-    margin: 30px 0px 0px;
+     margin: 15px 0px;
     &-search {
       border: 0.5px solid #909d8d;
       border-radius: 5px;
@@ -183,12 +183,12 @@ export default {
 }
 </style>
 <style lang="scss">
-.table-custom {
+.hoso-table-custom {
   .el-table__header-wrapper {
-    background: linear-gradient(180deg, #6e9e0e 0%, #097732 100%);
+    
     th {
-      background: linear-gradient(180deg, #6e9e0e 0%, #097732 100%);
-      // background-color: #1d974a !important;
+      
+      background-color: #1d974a !important;
       border-bottom: none !important;
       color: white;
       font-size: 16px;
