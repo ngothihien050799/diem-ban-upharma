@@ -1,4 +1,4 @@
-const BASE_URL = "https://upharma.vn/DiemBanAPI/gi"; // Link kết nối API
+const BASE_URL = "https://upharma.vn/DiemBanAPI/"; // Link kết nối API
  
 import axios from "axios";
 //Khởi tạo API đăng nhập
