@@ -113,7 +113,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+   created(){
+    const id = this.$route.params.id.replace("-","/");
+    //console.log(id);
+   }
+};
 </script>
 
 <style lang="scss" scoped>

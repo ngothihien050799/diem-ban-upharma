@@ -24,5 +24,6 @@ app.component("font-awesome-icon", FontAwesomeIcon); //Khai báo sử dụng com
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
 }
+require("datejs")
 app.use(ElementPlus);
 app.mount("#app");

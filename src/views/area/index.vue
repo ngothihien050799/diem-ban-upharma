@@ -16,7 +16,7 @@
         </form>
       </div>
 
-      <button class="khuvuc-hearder-add btn">
+      <button class="khuvuc-hearder-add btn" @click="handleCreate">
         <font-awesome-icon icon="fa-regular fa-file-lines" />
         <span> Tạo mới khu vực</span>
       </button>
@@ -40,9 +40,15 @@
         <el-table-column prop="CompanyType" label="Loại Khu vực" width="150" />
         <el-table-column prop="Delegate" label="Người đại diện" width="180" />
         <el-table-column prop="Size" label="Quy mô" width="180" />
-        <el-table-column prop="Commune" label="Địa chỉ" width="230" />
-        <el-table-column prop="TimeCreate" label="Thời gian tạo" width="200" />
-        <el-table-column label="Trạng thái">
+        <el-table-column prop="Commune" label="Địa chỉ" min-width="230" />
+        <el-table-column label="Thời gian tạo" width="200">
+          <template #default="scope">
+            <div v-if="scope.row.TimeCreate">
+              {{ Date.parse(scope.row.TimeCreate).toString("dd/MM/yyyy") }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="Trạng thái" width="100">
           <template #default="scope">
             <el-tag :type="scope.row.StatusColor">{{
               scope.row.StatusText
@@ -50,20 +56,35 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <el-dialog
+        v-model="centerDialogVisible"
+        title="Tạo mới hồ sơ Khu vực" center width="45%"
+        :close-on-click-modal="false"
+      >
+        <modal-info></modal-info>
+      </el-dialog>
+
     </div>
   </div>
 </template>
 
 <script>
 import { getCompanyList } from "@/api/areaApi.js";
+import ModalInfo from "./component/modal-info.vue";
 import Cookies from "js-cookie";
 export default {
+  components: { ModalInfo },
   data() {
     return {
       tableData: [],
+      centerDialogVisible: false,
     };
   },
   methods: {
+    handleCreate() {
+      this.centerDialogVisible = true;
+    },
     fetchData() {
       const req = {
         Username: Cookies.get("UserName"),
@@ -157,7 +178,6 @@ export default {
       background: #1d974a !important;
       border-bottom: none !important;
       color: white;
-      font-size: 16px;
     }
   }
 }

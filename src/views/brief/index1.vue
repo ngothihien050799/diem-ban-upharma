@@ -16,7 +16,7 @@
         </form>
       </div>
 
-      <button class="hoso-hearder-add btn">
+      <button class="hoso-hearder-add btn" @click="handleCreateHoso">
         <font-awesome-icon icon="fa-regular fa-file-lines" />
         <span> Tạo mới hồ sơ</span>
       </button>
@@ -30,18 +30,30 @@
         style="width: 100%"
       >
         <el-table-column type="index" label="STT" width="60" />
-        <el-table-column prop="" label="" width="40"
-          ><i
-            data-v-10a12202=""
-            class="fa-solid fa-file"
-            style="color: rgb(64, 158, 255)"
-          ></i>
+
+        <el-table-column prop="" label="" width="40">
+          <template #default="scope">
+            <router-link
+              :to="'/thong-tin-ho-so/' + scope.row.DocumentID.replace('/', '-')"
+            >
+              <i class="fa-solid fa-file" style="color: rgb(64, 158, 255)"></i>
+            </router-link>
+          </template>
         </el-table-column>
-        <el-table-column prop="DocName" label="Hồ sơ" width="200" />
-        <el-table-column prop="WarehouseName" label="Điểm bán" width="200" />
-        <el-table-column prop="CompanyName" label="Tên Khu vực" width="180" />
+
+        <el-table-column prop="DocName" label="Hồ sơ" min-width="200" />
+        <el-table-column
+          prop="WarehouseName"
+          label="Điểm bán"
+          min-width="160"
+        />
+        <el-table-column
+          prop="CompanyName"
+          label="Tên Khu vực"
+          min-width="160"
+        />
         <el-table-column prop="DateRecept" label="Ngày tiếp nhận" width="180" />
-        <el-table-column prop="EmployeeName" label="Người xử lý" width="230" />
+        <el-table-column prop="EmployeeName" label="Người xử lý" width="200" />
         <el-table-column label="Trạng thái" width="140">
           <template #default="scope">
             <el-tag :type="scope.row.StatusColor">{{
@@ -50,20 +62,34 @@
           </template>
         </el-table-column>
         <el-table-column prop="Note" label="Ghi chú" width="100" />
-        <el-table-column prop="LinkFile" label="Tệp đính kèm" />
+        <el-table-column prop="LinkFile" label="Tệp đính kèm" width="120" />
       </el-table>
     </div>
   </div>
+  <el-dialog
+    v-model="centerDialogVisible"
+    title="Tạo mới hồ sơ"
+    width="55%"
+    center
+    :close-on-click-modal="false"
+  >
+    <ModalHoso />
+  </el-dialog>
 </template>
 
 <script>
 import { getDocumentList } from "@/api/documentApi.js";
 import { ElNotification } from "element-plus";
+import ModalHoso from "./component/modalHoso.vue";
 import Cookies from "js-cookie";
 export default {
+  components: {
+    ModalHoso,
+  },
   data() {
     return {
       tableData: [],
+      centerDialogVisible: false,
     };
   },
   methods: {
@@ -105,6 +131,9 @@ export default {
         }
       });
     },
+    handleCreateHoso() {
+      this.centerDialogVisible = true;
+    },
   },
   created() {
     this.fetchData();
@@ -124,7 +153,7 @@ export default {
   font-family: "Roboto", sans-serif;
   margin: 15px;
   .hoso-hearder {
-     margin: 15px 0px;
+    margin: 15px 0px;
     &-search {
       border: 0.5px solid #909d8d;
       border-radius: 5px;
@@ -185,13 +214,10 @@ export default {
 <style lang="scss">
 .hoso-table-custom {
   .el-table__header-wrapper {
-    
     th {
-      
       background-color: #1d974a !important;
       border-bottom: none !important;
       color: white;
-      font-size: 16px;
     }
   }
 }

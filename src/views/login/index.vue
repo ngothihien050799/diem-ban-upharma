@@ -78,8 +78,9 @@ export default {
         userLogin(req).then((res) => {
           if (res.RespCode == 0) {
             this.$router.push("/thong-ke");
-            Cookies.set("Token", res.Token); // Lưu token vào trong Cookies
-            Cookies.set("UserName", this.input.username); // Lưu username vào trong Cookies
+            Cookies.set("Token", res.Token, { expires: 365 }); // Lưu token vào trong Cookies
+            Cookies.set("UserName", res.UserInfo.UserName, { expires: 365 }); // Lưu username vào trong Cookies
+            Cookies.set("EmployeeCode", res.UserInfo.EmployeeCode, { expires: 365 }); // Lưu  vào trong Cookies
           } else {
             ElNotification({
               title: "Xảy ra lỗi",

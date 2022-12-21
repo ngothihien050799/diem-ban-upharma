@@ -1,6 +1,6 @@
 <template>
   <h4 class="chart-title">Phân tích doanh số</h4>
-  <div class="chart-bar">
+  <div class="chart-bar" style="position: relative; height:40vh; width:100%">
     <canvas id="myChart"> </canvas>
   </div>
 </template>

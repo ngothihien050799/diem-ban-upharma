@@ -15,13 +15,13 @@
       </div>
     </div>
     <div class="dashboard-chart row">
-      <div class="col-sm-12 col-md-12 col-lg-8 bg-white dashboard-chart-left">
+      <div class="col-sm-12 col-md-12 col-lg-12 bg-white dashboard-chart-left">
         <ChartComponent />
       </div>
-      <div class="dashboard-chart-right col-lg-4">
-        <div>
+      <div class="dashboard-chart-right row ">
+        <div class="d-flex round-item">
           <round-chart
-            class="dashboard-chart-right-item col-lg-12"
+            class="dashboard-chart-right-item col-lg-6"
             v-for="(item, index) in rounds"
             :key="index"
             :round="item"
@@ -150,12 +150,18 @@ export default {
       border-radius: 5px;
       padding: 20px;
       margin-top: 20px;
+      // height: 200px;
     }
     &-right {
+
       &-item {
         background: #fff;
         margin-top: 20px;
+     
       }
+      // .round-item{
+      //   justify-content: space-between;
+      // }
     }
   }
 }

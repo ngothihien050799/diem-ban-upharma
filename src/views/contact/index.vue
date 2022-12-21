@@ -1,67 +1,87 @@
 <template>
-<div class="wrapper contact">
-  <div class="contact-hearder d-flex">
-    <div class="contact-hearder-search">
-      <form method="get" action="">
-        <div class="contact-hearder-search-text">
-          <div class="td">
-            <input type="text" placeholder=" Tìm kiếm..." required />
+  <div class="wrapper contact">
+    <div class="contact-hearder d-flex">
+      <div class="contact-hearder-search">
+        <form method="get" action="">
+          <div class="contact-hearder-search-text">
+            <div class="td">
+              <input type="text" placeholder=" Tìm kiếm..." required />
+            </div>
+            <div class="td" id="s-cover">
+              <button type="submit">
+                <i class="icon search fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
           </div>
-          <div class="td" id="s-cover">
-            <button type="submit">
-              <i class="icon search fa-solid fa-magnifying-glass"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
+
+      <button class="contact-hearder-add btn" @click="handleCreateLienhe">
+        <font-awesome-icon icon="fa-regular fa-file-lines" />
+        <span> Tạo mới liên hệ</span>
+      </button>
     </div>
 
-    <button class="contact-hearder-add btn">
-      <font-awesome-icon icon="fa-regular fa-file-lines" />
-      <span> Tạo mới liên hệ</span>
-    </button>
+    <el-table
+      class="contact-table"
+      stripe
+      :data="tableData"
+      style="width: 100%"
+    >
+      <el-table-column type="index" label="STT" width="60" />
+      <el-table-column prop="" label="" width="40"
+        ><i
+          data-v-10a12202=""
+          class="fa-solid fa-file"
+          style="color: rgb(64, 158, 255)"
+        ></i>
+      </el-table-column>
+
+      <el-table-column label="Trạng thái" width="100">
+        <template #default="scope">
+          <el-tag :type="scope.row.StatusColor">{{
+            scope.row.StatusText
+          }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="EmployeeCode" label="Mã NS" width="100" />
+      <el-table-column prop="FullName" label="Họ tên" min-width="160" />
+      <el-table-column prop="PhoneNumber" label="SĐT" width="120" />
+      <el-table-column prop="Email" label="Email" min-width="180" />
+      <el-table-column prop="Specialize" label="Chuyên môn" width="150" />
+      <el-table-column prop="Position" label="Chức vụ" width="100" />
+      <el-table-column prop="CompanyName" label="Khu vực" min-width="140" />
+      <el-table-column prop="" label="" width="60"
+        ><Delete
+          style="width: 1em; height: 1em; margin-right: 8px; color: red"
+        />
+      </el-table-column>
+    </el-table>
   </div>
-
-  <el-table class="contact-table" :data="tableData" style="width: 100%">
-    <el-table-column type="index" label="STT" width="60" />
-    <el-table-column prop="" label="" width="40"
-      ><i
-        data-v-10a12202=""
-        class="fa-solid fa-file"
-        style="color: rgb(64, 158, 255)"
-      ></i>
-    </el-table-column>
-
-    <el-table-column label="Trạng thái" width="100">
-      <template #default="scope">
-        <el-tag :type="scope.row.StatusColor">{{
-          scope.row.StatusText
-        }}</el-tag>
-      </template>
-    </el-table-column>
-    <el-table-column prop="EmployeeCode" label="Mã NS" width="100" />
-    <el-table-column prop="FullName" label="Họ tên" width="250" />
-    <el-table-column prop="PhoneNumber" label="SĐT" width="120" />
-    <el-table-column prop="Email" label="Email" width="300" />
-    <el-table-column prop="Specialize" label="Chuyên môn" width="150" />
-    <el-table-column prop="Position" label="Chức vụ" width="100" />
-    <el-table-column prop="CompanyName" label="Khu vực" width="180" />
-    <el-table-column prop="" label=""
-      ><Delete style="width: 1em; height: 1em; margin-right: 8px; color: red" />
-    </el-table-column>
-  </el-table>
-</div>
-
+  <el-dialog
+    v-model="centerDialogVisible"
+    title="Tạo mới hồ sơ Liên hệ"
+    center
+    width="55%"
+    :close-on-click-modal="false"
+  >
+    <modal-contact />
+  </el-dialog>
 </template>
 
 <script>
 import { getEmployeeList } from "@/api/contactApi.js";
 import { ElNotification } from "element-plus";
 import Cookies from "js-cookie";
+import ModalContact from "./component/modal-contact.vue";
 export default {
+  components: {
+    ModalContact,
+  },
   data() {
     return {
       tableData: [],
+      centerDialogVisible: false,
     };
   },
   methods: {
@@ -99,6 +119,9 @@ export default {
           });
         }
       });
+    },
+    handleCreateLienhe() {
+      this.centerDialogVisible = true;
     },
   },
   created() {

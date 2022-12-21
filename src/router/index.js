@@ -1,12 +1,23 @@
-import { createRouter, createWebHistory,createWebHashHistory ,createMemoryHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+  createMemoryHistory,
+} from "vue-router";
 import Login from "@/views/login/index.vue";
 import Layer from "@/components/layout/index.vue";
 import Dashboard from "@/views/dashboard/index.vue";
-import Record from "@/views/brief/index1.vue";
+import Brief from "@/views/brief/index1.vue";
+import Work from "@/views/work/index";
 import Detail from "@/views/jobdetails/index.vue";
-import NotFound from "@/views/404/index"
+import NotFound from "@/views/404/index";
 import Contact from "@/views/contact/index.vue";
-import Area from "@/views/area/index.vue"
+import Area from "@/views/area/index.vue";
+import Calender from "@/views/calender/index.vue";
+import WareHouse from "@/views/wareHouse/index";
+import Setting from "@/views/settingg/index";
+import Account from "@/views/account/index";
+import Default from "@/views/default/index";
 const routes = [
   {
     path: "/login",
@@ -16,7 +27,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    redirect:"/thong-ke",
+    redirect: "/thong-ke",
     component: Layer,
     //alias: ["/login"]
   },
@@ -32,7 +43,11 @@ const routes = [
       },
       {
         path: "ho-so",
-        component: Record,
+        component: Brief,
+      },
+      {
+        path: "cong-viec",
+        component: Work,
       },
       {
         path: "thong-tin-ho-so/:id",
@@ -45,10 +60,30 @@ const routes = [
       {
         path: "lien-he",
         component: Contact,
-      }
+      },
+      {
+        path: "diem-ban",
+        component: WareHouse,
+      },
+      {
+        path: "lich-KT",
+        component: Calender,
+      },
+      {
+        path: "cai-dat",
+        component: Setting,
+      },
+      {
+        path: "tai-khoan",
+        component: Account,
+      },
+      {
+        path: "mac-dinh",
+        component: Default,
+      },
     ],
   },
-  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
+  { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   // {
   //   path: "/",
   //   name: "ho-so",
@@ -67,8 +102,9 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory (process.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),
   routes,
+  linkActiveClass: "-activeLinkMenu",
 });
 
 export default router;

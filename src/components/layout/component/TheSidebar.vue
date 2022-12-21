@@ -41,7 +41,7 @@ export default {
           value: 3,
           label: "Công việc",
           icon: "<i class='fa-solid fa-briefcase'></i>",
-          path: "/",
+          path: "/cong-viec",
         },
         {
           value: 4,
@@ -59,31 +59,31 @@ export default {
           value: 6,
           label: "Điểm bán",
           icon: "<i class='fa-solid fa-house-medical-flag icon'></i>",
-          path: "/",
+          path: "/diem-ban",
         },
         {
           value: 7,
           label: "Lịch KT",
           icon: "<i class='fa-regular fa-calendar-days icon'></i>",
-          path: "/",
+          path: "/lich-KT",
         },
         {
           value: 8,
           label: "Cài đặt",
           icon: "<i class='fa-solid fa-gear icon'></i>",
-          path: "/",
+          path: "/cai-dat",
         },
         {
           value: 9,
           label: "Tài khoản",
           icon: "<i class='fa-solid fa-power-off icon'></i>",
-          path: "/",
+          path: "/tai-khoan",
         },
         {
           value: 10,
           label: "Mặc định",
           icon: "<i class='fa-solid fa-power-off icon'></i>",
-          path: "/",
+          path: "/mac-dinh",
         },
       ],
     };
@@ -118,22 +118,22 @@ export default {
 
   .menu {
     font-family: "Roboto", sans-serif;
+    margin-top: 20px;
     &-item {
-      margin-top: 10px;
-      margin-right: 10px;
-
+      margin-top: 15px;
+      margin-right: 20px;
+      margin-left: 10px;
       a {
         text-decoration: none;
         color: #fff;
         display: flex;
         align-items: center;
         font-size: 16px;
-        // font-weight: bold;
         .icon {
           width: 20px;
           height: 20px;
           display: block;
-          margin-left: 15px;
+          margin-left: 20px;
         }
         .text {
           padding-left: 20px;
@@ -145,16 +145,9 @@ export default {
 }
 a:hover {
   background-color: white;
-  border-radius: 5px;
-  // font-weight: 600;
-  span {
-    color: #1d974a;
-  }
-}
-a:focus {
-  background-color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   font-weight: 600;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   span {
     color: #1d974a;
   }
