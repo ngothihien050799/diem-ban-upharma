@@ -59,7 +59,7 @@
 
       <el-dialog
         v-model="centerDialogVisible"
-        title="Tạo mới hồ sơ Khu vực" center width="45%"
+        title="Tạo mới hồ sơ Khu vực" center width="900px"
         :close-on-click-modal="false"
       >
         <modal-info></modal-info>

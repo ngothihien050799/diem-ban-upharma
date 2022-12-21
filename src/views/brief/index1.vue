@@ -69,7 +69,7 @@
   <el-dialog
     v-model="centerDialogVisible"
     title="Tạo mới hồ sơ"
-    width="55%"
+    width="900px"
     center
     :close-on-click-modal="false"
   >

@@ -62,7 +62,7 @@
     v-model="centerDialogVisible"
     title="Tạo mới hồ sơ Liên hệ"
     center
-    width="55%"
+    width="900px"
     :close-on-click-modal="false"
   >
     <modal-contact />
