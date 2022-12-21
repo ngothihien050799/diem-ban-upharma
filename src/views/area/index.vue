@@ -59,18 +59,21 @@
 
       <el-dialog
         v-model="centerDialogVisible"
-        title="Tạo mới hồ sơ Khu vực" center width="900px"
+        title="Tạo mới hồ sơ Khu vực"
+        center
+        width="900px"
         :close-on-click-modal="false"
       >
-        <modal-info></modal-info>
+        <modal-info @save="handleClickSave" @close="handleClose" :cityList="cityList"></modal-info>
       </el-dialog>
-
     </div>
   </div>
 </template>
 
 <script>
 import { getCompanyList } from "@/api/areaApi.js";
+import { getCityList } from "@/api/defaultValueApi";
+import { ElNotification } from "element-plus";
 import ModalInfo from "./component/modal-info.vue";
 import Cookies from "js-cookie";
 export default {
@@ -79,12 +82,34 @@ export default {
     return {
       tableData: [],
       centerDialogVisible: false,
+      cityList: [],
     };
   },
   methods: {
+    getCityLst() {
+      let req = {
+        Username: Cookies.get("UserName"),
+        Token: Cookies.get("Token"),
+      };
+      getCityList(req).then((res) => {
+        if (res.RespCode == 0) {
+          this.cityList = res.Data;
+          // console.log(this.cityList);
+        }
+      });
+    },
     handleCreate() {
       this.centerDialogVisible = true;
     },
+    //Sự kiện khi tạo thành công
+    handleClickSave(item) {
+      // this.tableData.push(item);
+      this.centerDialogVisible = false; // Dong form lai
+      this.fetchData(); //Lam moi lai du lieu
+    },
+handleClose(){
+  this.centerDialogVisible = false;
+},
     fetchData() {
       const req = {
         Username: Cookies.get("UserName"),
@@ -97,7 +122,6 @@ export default {
         if (res.RespCode == 0) {
           //this.tableData = res.Data;
           //console.log(this.tableData);
-
           //Sử dụng map tạo ra mảng mới để convert dữ liệu nhận được (thêm filter trạng thái)
           this.tableData = res.CompanyLst.map((p) => {
             let obj = p;
@@ -113,7 +137,6 @@ export default {
             }
             return obj;
           });
-          console.log(this.tableData);
         } else {
           ElNotification({
             title: "Xảy ra lỗi",
@@ -126,6 +149,7 @@ export default {
   },
   created() {
     this.fetchData();
+    this.getCityLst();
   },
 };
 </script>

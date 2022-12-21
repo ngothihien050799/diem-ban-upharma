@@ -13,3 +13,12 @@ export const getCompanyList = async (data) => {
   });
   return res.data;
 };
+
+export const addAreaApi = async(area) => {
+const res = await axios({
+  method: "POST",
+  url: BASE_URL + "GSPCompany/AddCompanyInfo",
+  data: area,
+});
+return res.data;
+}

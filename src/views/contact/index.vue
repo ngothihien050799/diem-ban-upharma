@@ -93,9 +93,9 @@ export default {
         PageNumber: 1,
         RowspPage: 100,
       };
-      console.log(req);
+      // console.log(req);
       getEmployeeList(req).then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.RespCode == 0) {
           this.tableData = res.EmployeeLst.map((p) => {
             let obj = p;
