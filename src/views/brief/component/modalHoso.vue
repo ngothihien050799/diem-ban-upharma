@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" label-width="120px">
+  <el-form :model="form" label-width="150px" label-position="left">
     <el-form-item label="Khu vực">
       <el-select
         v-model="form.region"
@@ -46,10 +46,10 @@
     <el-form-item label="Link tệp đính kèm">
       <el-input v-model="form.link"/>
     </el-form-item>
-    <el-form-item>
+    <div class="footer-modal">
       <el-button>Cancel</el-button>
       <el-button type="primary" @click="onSubmit">Xác nhận</el-button>
-    </el-form-item>
+    </div>
   </el-form>
 </template>
 
@@ -78,4 +78,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.footer-modal{
+  text-align: center;
+}
+</style>

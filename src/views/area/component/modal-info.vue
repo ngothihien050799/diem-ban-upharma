@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" label-width="120px" label-position="left">
+  <el-form :model="form" label-width="150px" label-position="left">
     <el-form-item label="Tên Khu vực">
       <el-input v-model="form.CompanyName" placeholder="Nhập tên Khu vực" />
     </el-form-item>
@@ -22,6 +22,7 @@
             class="diachi"
             v-model="form.City"
             placeholder="Chọn tỉnh/Tp"
+            @change="changeCity"
           >
             <el-option
               v-for="(item, index) in cityList"
@@ -38,6 +39,7 @@
             class="diachi"
             v-model="form.District"
             placeholder="Chọn quận/huyện"
+            @change="changeDistrict"
           >
             <el-option
               v-for="(item, index) in districtList"
@@ -74,13 +76,14 @@
 </template>
 
 <script>
-import { addAreaApi } from "@/api/areaApi.js";
+import { addAreaApi, upDateAreaApi } from "@/api/areaApi.js";
 import { ElNotification } from "element-plus";
 import Cookies from "js-cookie";
 import { getDistrictList, getCommuneList } from "@/api/defaultValueApi";
 export default {
   props: {
     cityList: Array,
+    rowData: Object,
   },
   data() {
     return {
@@ -104,10 +107,8 @@ export default {
         TimeApporve: "",
         ActiveAreav: "",
         NumberRegister: "",
-        delivery: false,
-        type: [],
-        quan: "",
-        phuong: "",
+       
+        
       },
       districtList: [],
       communeList: [],
@@ -117,32 +118,62 @@ export default {
   methods: {
     onSubmit() {
       //Tạo request đẩy lên API
+      this.form.Address = this.form.Commune + " - " +this.form.District  + " - " + this.form.City;
+      if(this.rowData){
+        this.form.Status = 1
+      }
       const req = {
         UserName: Cookies.get("UserName"),
         Token: Cookies.get("Token"),
         CompanyInfo: this.form,
       };
-
-      //Gọi API
-      addAreaApi(req).then((res) => {
-        //RespCode = 0 : tạo mới thành công
-        if (res.RespCode == 0) {
-          ElNotification({
-            title: "Thành công",
-            message: "Thêm mới khu vực thành công",
-            type: "success",
-          });
-          //Thành công thì báo ra thằng cha để đóng form lại
-          this.$emit("save", this.form);
-          // console.log(this.form);
-        } else {
-          ElNotification({
-            title: "Xảy ra lỗi",
-            message: res.RespText,
-            type: "error",
-          });
-        }
-      });
+      //Nếu ko có rowData tức là tạo mới
+      if (!this.rowData) {
+        //Gọi API tạo mới khu vực
+        addAreaApi(req).then((res) => {
+          //RespCode = 0 : tạo mới thành công
+          if (res.RespCode == 0) {
+            ElNotification({
+              title: "Thành công",
+              message: "Thêm mới khu vực thành công!",
+              type: "success",
+            });
+            //Thành công thì báo ra thằng cha để đóng form lại
+            this.$emit("save", this.form);
+            // console.log(this.form);
+          } else {
+            ElNotification({
+              title: "Xảy ra lỗi",
+              message: res.RespText,
+              type: "error",
+            });
+          }
+        });
+      }
+      //Nếu có rowData tức là cập nhật
+      else {
+        //Gọi API cập nhật
+        
+        upDateAreaApi(req).then((res) => {
+          //RespCode = 0 : tạo mới thành công
+          if (res.RespCode == 0) {
+            ElNotification({
+              title: "Thành công",
+              message: "Cập nhật khu vực thành công!",
+              type: "success",
+            });
+            //Thành công thì báo ra thằng cha để đóng form lại
+            this.$emit("save", this.form);
+            // console.log(this.form);
+          } else {
+            ElNotification({
+              title: "Xảy ra lỗi",
+              message: res.RespText,
+              type: "error",
+            });
+          }
+        });
+      }
     },
     closeForm() {
       this.$emit("close");
@@ -172,22 +203,69 @@ export default {
         }
       });
     },
+    changeCity(val) {
+      this.getDistrictList();
+    },
+    changeDistrict(val) {
+      this.getCommuneList();
+    },
+    initData() {
+      if (this.rowData) {
+        // console.log(this.rowData);
+        this.form.Address = this.rowData.Address;
+        this.form.City = this.rowData.City;
+        this.form.Commune = this.rowData.Commune;
+        this.form.CompanyID = this.rowData.CompanyID;
+        this.form.CompanyName = this.rowData.CompanyName;
+        this.form.CompanyType = this.rowData.CompanyType;
+        this.form.CreateID = this.rowData.CreateID;
+        this.form.Delegate = this.rowData.Delegate;
+        this.form.District = this.rowData.District;
+        this.form.NumberRegister = this.rowData.NumberRegister;
+        this.form.Size = this.rowData.Size;
+        this.form.Status = this.rowData.Status;
+        this.form.TimeApporve = this.rowData.TimeApporve;
+        this.form.TimeCreate = this.rowData.TimeCreate;
+        this.form.TimeModify = this.rowData.TimeModify;
+        // console.log(this.form);
+      } else {
+        this.form.Address = "";
+        this.form.City = "";
+        this.form.Commune = "";
+        this.form.CompanyID = "";
+        this.form.CompanyName = "";
+        this.form.CompanyType = "";
+        this.form.CreateID = "";
+        this.form.Delegate = "";
+        this.form.District = "";
+        this.form.NumberRegister = "";
+        this.form.Size = "";
+        this.form.Status = "";
+        this.form.TimeApporve = "";
+        this.form.TimeCreate = "";
+        this.form.TimeModify = "";
+      }
+    },
   },
   created() {
     // this.getDistrictList();
     // console.log(this.districtList);
+    this.initData();
   },
   watch: {
-    "form.City"(newv, old) {
-      console.log(newv, old);
-      this.getDistrictList();
-      this.form.District = "";
-      this.form.Commune = "";
-    },
-    "form.District"(newv, old) {
-      console.log(newv, old);
-      this.getCommuneList();
-      this.form.Commune = "";
+    // "form.City"(newv, old) {
+    //   // console.log(newv, old);
+    //   this.getDistrictList();
+    //   // this.form.District = "";
+    //   // this.form.Commune = "";
+    // },
+    // "form.District"(newv, old) {
+    //   // console.log(newv, old);
+    //   this.getCommuneList();
+    //   // this.form.Commune = "";
+    // },
+    rowData() {
+      this.initData();
     },
   },
 };

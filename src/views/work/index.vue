@@ -11,16 +11,16 @@
       <el-table :data="tableData" stripe style="width: 100%">
         <el-table-column type="index" width="40" />
         <!-- <el-table-column prop="QuantityCheck" label="Vai trò" width="180" /> -->
-        <el-table-column label="Vai trò" width="140">
+        <el-table-column label="Vai trò" width="100">
           <template #default="scope">
             <el-button :type="scope.row.QuantityCheckColor">{{
               scope.row.QuantityCheckText
             }}</el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="JobName" label="Đầu việc" min-width="180" />
+        <el-table-column prop="JobName" label="Đầu việc" min-width="200" />
         <el-table-column prop="StepName" label="Giai đoạn" width="220" />
-        <el-table-column prop="ProcedureName" label="Hồ sơ" min-width="180" />
+        <el-table-column prop="ProcedureName" label="Hồ sơ" width="220" />
         <el-table-column prop="WarehouseName" label="Điểm bán" width="220" />
         <el-table-column prop="QuotaTime" class="Time" label="Thời hạn (ngày)" width="180" />
         <el-table-column prop="date" label="Bắt đầu" width="120" />

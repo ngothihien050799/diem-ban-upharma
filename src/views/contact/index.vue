@@ -2,21 +2,19 @@
   <div class="wrapper contact">
     <div class="contact-hearder d-flex">
       <div class="contact-hearder-search">
-        <form method="get" action="">
-          <div class="contact-hearder-search-text">
-            <div class="td">
-              <input type="text" placeholder=" Tìm kiếm..." required />
-            </div>
-            <div class="td" id="s-cover">
-              <button type="submit">
-                <i class="icon search fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
+        <div class="contact-hearder-search-text">
+          <div class="td">
+            <input type="text" v-model="search" placeholder=" Tìm kiếm..." />
           </div>
-        </form>
+          <div class="td" id="s-cover">
+            <button @click="fetchData">
+              <i class="icon search fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <button class="contact-hearder-add btn" @click="handleCreateLienhe">
+      <button class="contact-hearder-add btn" @click="handleCreate">
         <font-awesome-icon icon="fa-regular fa-file-lines" />
         <span> Tạo mới liên hệ</span>
       </button>
@@ -28,15 +26,14 @@
       :data="tableData"
       style="width: 100%"
     >
-      <el-table-column type="index" label="STT" width="60" />
-      <el-table-column prop="" label="" width="40"
-        ><i
-          data-v-10a12202=""
-          class="fa-solid fa-file"
-          style="color: rgb(64, 158, 255)"
-        ></i>
+      <el-table-column type="index" label="STT" width="50" />
+      <el-table-column prop="" label="" width="50"
+        ><template #default="scope">
+          <el-button type="text" @click="handleUpdate(scope.row)">
+            <i class="fa-solid fa-file-pen" style="color: rgb(242, 175, 75)"></i
+          ></el-button>
+        </template>
       </el-table-column>
-
       <el-table-column label="Trạng thái" width="100">
         <template #default="scope">
           <el-tag :type="scope.row.StatusColor">{{
@@ -52,25 +49,36 @@
       <el-table-column prop="Position" label="Chức vụ" width="100" />
       <el-table-column prop="CompanyName" label="Khu vực" min-width="140" />
       <el-table-column prop="" label="" width="60"
-        ><Delete
-          style="width: 1em; height: 1em; margin-right: 8px; color: red"
-        />
+        ><template #default="scope">
+            <el-button type="text" @click="handleDelete(scope.row)">
+              <Delete
+                style="width: 1em; height: 1em; margin-right: 8px; color: red"
+              />
+            </el-button>
+          </template>
       </el-table-column>
     </el-table>
   </div>
   <el-dialog
     v-model="centerDialogVisible"
-    title="Tạo mới hồ sơ Liên hệ"
+    :title="titleDialog"
     center
     width="900px"
     :close-on-click-modal="false"
   >
-    <modal-contact />
+    <modal-contact
+      @save="handleClickSave"
+      @close="handleClose"
+      :areaList="areaList"
+      :rowData="rowData"
+    >
+    </modal-contact>
   </el-dialog>
 </template>
 
 <script>
-import { getEmployeeList } from "@/api/contactApi.js";
+import { getEmployeeList, updateEmployeeList } from "@/api/contactApi.js";
+import { getCompanyList } from "@/api/areaApi.js";
 import { ElNotification } from "element-plus";
 import Cookies from "js-cookie";
 import ModalContact from "./component/modal-contact.vue";
@@ -82,14 +90,26 @@ export default {
     return {
       tableData: [],
       centerDialogVisible: false,
+      titleDialog: "",
+      search: "",
+      rowData: "",
+      areaList: [],
     };
   },
   methods: {
+    handleClickSave(item) {
+      // this.tableData.push(item);
+      this.centerDialogVisible = false; // Dong form lai
+      this.fetchData(); //Lam moi lai du lieu
+    },
+    handleClose() {
+      this.centerDialogVisible = false;
+    },
     fetchData() {
       const req = {
         Username: Cookies.get("UserName"),
         Token: Cookies.get("Token"),
-        Search: "",
+        Search: this.search,
         PageNumber: 1,
         RowspPage: 100,
       };
@@ -120,12 +140,78 @@ export default {
         }
       });
     },
-    handleCreateLienhe() {
+    fetchArea() {
+      const req = {
+        Username: Cookies.get("UserName"),
+        Token: Cookies.get("Token"),
+        Search: "",
+        PageNumber: 1,
+        RowspPage: 100,
+      };
+      getCompanyList(req).then((res) => {
+        if (res.RespCode == 0) {
+          //this.tableData = res.Data;
+          //console.log(this.tableData);
+          //Sử dụng map tạo ra mảng mới để convert dữ liệu nhận được (thêm filter trạng thái)
+          this.areaList = res.CompanyLst;
+        } else {
+          ElNotification({
+            title: "Xảy ra lỗi",
+            message: res.RespText,
+            type: "error",
+          });
+        }
+      });
+    },
+    handleCreate() {
       this.centerDialogVisible = true;
+      this.titleDialog = "Tạo mới hồ sơ liên hệ";
+    },
+    handleUpdate(row) {
+      this.centerDialogVisible = true;
+      this.titleDialog = "Cập nhật liên hệ";
+
+      this.rowData = row;
+      // console.log(row);
+    },
+     handleDelete(row) {
+      this.$confirm(
+        "Bạn muốn xóa nhân viên " + row.FullName + ". Tiếp tục?",
+        "Cảnh báo",
+        {
+          confirmButtonText: "Xác nhận",
+          cancelButtonText: "Hủy",
+          type: "warning",
+        }
+      )
+        .then(() => {
+          row.Status = 0;
+          const req = {
+            UserName: Cookies.get("UserName"),
+            Token: Cookies.get("Token"),
+            EmployeeInfo: row,
+          };
+          updateEmployeeList(req).then((res) => {
+            if (res.RespCode == 0) {
+              this.$message({
+                type: "success",
+                message: "Xóa nhân viên thành công!",
+              });
+              this.fetchData();
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "Không có thay đổi",
+          });
+        });
     },
   },
   created() {
     this.fetchData();
+    this.fetchArea();
   },
 };
 </script>

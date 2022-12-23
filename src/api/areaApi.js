@@ -22,3 +22,11 @@ const res = await axios({
 });
 return res.data;
 }
+export const upDateAreaApi = async(area) => {
+const res = await axios({
+  method: "POST",
+  url: BASE_URL + "GSPCompany/UpdateCompanyInfo",
+  data: area,
+});
+return res.data;
+}

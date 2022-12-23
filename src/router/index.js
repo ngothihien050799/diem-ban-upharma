@@ -7,7 +7,7 @@ import {
 import Login from "@/views/login/index.vue";
 import Layer from "@/components/layout/index.vue";
 import Dashboard from "@/views/dashboard/index.vue";
-import Brief from "@/views/brief/index1.vue";
+import Brief from "@/views/brief/index.vue";
 import Work from "@/views/work/index";
 import Detail from "@/views/jobdetails/index.vue";
 import NotFound from "@/views/404/index";
