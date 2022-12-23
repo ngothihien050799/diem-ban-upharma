@@ -16,7 +16,6 @@
         class="diachi"
         v-model="form.CompanyID"
         placeholder="Chọn khu vực"
-        @change="changeDepartment"
         style="width: 100%"
       >
         <el-option
@@ -80,6 +79,8 @@ export default {
       this.$emit("close");
     },
     onSubmit() {
+      //Nếu là cập nhập thì đưa status = 1 : đang làm việc
+      // if(this.rowData) this.form.Status = 1;
       //Tạo request đẩy lên API
       const req = {
         UserName: Cookies.get("UserName"),
@@ -100,20 +101,19 @@ export default {
           } else {
             ElNotification({
               title: "Xảy ra lỗi",
-              message: res.RespText,
+              message: "Bạn chưa thêm khu vực cho liên hệ",
               type: "error",
             });
           }
         });
       } else {
         //Gọi API cập nhật
-
         updateEmployeeList(req).then((res) => {
           //RespCode = 0 : tạo mới thành công
           if (res.RespCode == 0) {
             ElNotification({
               title: "Thành công",
-              message: "Cập nhật khu vực thành công!",
+              message: "Cập nhật liên hệ thành công!",
               type: "success",
             });
             //Thành công thì báo ra thằng cha để đóng form lại

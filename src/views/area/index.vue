@@ -32,8 +32,16 @@
         style="width: 100%"
       >
         <el-table-column type="index" label="" width="40" />
-        <el-table-column prop="" label="" width="50">
-          <template #default="scope">
+
+        <el-table-column prop="" label="" width="80">
+          <template #default="scope" class="d-flex">
+            <el-button type="text">
+              <router-link :to="'/thong-tin-khu-vuc'">
+                <i
+                  class="fa-solid fa-file"
+                  style="color: rgb(64, 158, 255)"
+                ></i> </router-link
+            ></el-button>
             <el-button type="text" @click="handleUpdate(scope.row)">
               <i
                 class="fa-solid fa-file-pen"
@@ -154,7 +162,6 @@ export default {
     handleUpdate(row) {
       this.centerDialogVisible = true;
       this.titleDialog = "Cập nhật hồ sơ khu vực";
-
       this.rowData = row;
       // console.log(row);
     },
@@ -209,7 +216,7 @@ export default {
             let obj = p;
             if (p.Status == 1) {
               obj.StatusText = "Đang hoạt động";
-              obj.StatusColor = "";
+              obj.StatusColor = "success";
             } else if (p.Status == 0) {
               obj.StatusColor = "danger";
               obj.StatusText = "Dừng hoạt động";
@@ -228,10 +235,12 @@ export default {
         }
       });
     },
+   
   },
   created() {
     this.fetchData();
     this.getCityLst();
+    
   },
 };
 </script>

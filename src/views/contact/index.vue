@@ -26,7 +26,7 @@
       :data="tableData"
       style="width: 100%"
     >
-      <el-table-column type="index" label="STT" width="50" />
+      <el-table-column type="index" label="Stt" width="50" />
       <el-table-column prop="" label="" width="50"
         ><template #default="scope">
           <el-button type="text" @click="handleUpdate(scope.row)">
@@ -45,17 +45,24 @@
       <el-table-column prop="FullName" label="Họ tên" min-width="160" />
       <el-table-column prop="PhoneNumber" label="SĐT" width="120" />
       <el-table-column prop="Email" label="Email" min-width="180" />
+      <el-table-column prop="CompanyName" label="Khu vực" min-width="140" />
       <el-table-column prop="Specialize" label="Chuyên môn" width="150" />
       <el-table-column prop="Position" label="Chức vụ" width="100" />
-      <el-table-column prop="CompanyName" label="Khu vực" min-width="140" />
-      <el-table-column prop="" label="" width="60"
+      <el-table-column prop="" label="" width="35"
         ><template #default="scope">
-            <el-button type="text" @click="handleDelete(scope.row)">
-              <Delete
-                style="width: 1em; height: 1em; margin-right: 8px; color: red"
-              />
-            </el-button>
-          </template>
+          <el-button type="text" @click="handleDelete(scope.row)">
+            <Delete
+              style="width: 1em; height: 1em; margin-right: 8px; color: red"
+            />
+          </el-button>
+        </template>
+      </el-table-column>
+      <el-table-column prop="" label="" width="80"
+        ><template #default="scope">
+          <el-button type="success" @click="handleAdd(scope.row)">
+            <Plus style="width: 15px" />
+          </el-button>
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -121,9 +128,9 @@ export default {
             let obj = p;
             if (p.Status == 1) {
               obj.StatusText = "Đang làm";
-              obj.StatusColor = "";
+              obj.StatusColor = "success";
             } else if (p.Status == 0) {
-              obj.StatusColor = "warning";
+              obj.StatusColor = "danger";
               obj.StatusText = "Đã nghỉ";
             } else {
               obj.StatusText = "Khác";
@@ -140,7 +147,7 @@ export default {
         }
       });
     },
-    fetchArea() {
+     fetchArea() {
       const req = {
         Username: Cookies.get("UserName"),
         Token: Cookies.get("Token"),
@@ -163,18 +170,19 @@ export default {
         }
       });
     },
+    
     handleCreate() {
       this.centerDialogVisible = true;
       this.titleDialog = "Tạo mới hồ sơ liên hệ";
+      this.rowData = null;
     },
     handleUpdate(row) {
       this.centerDialogVisible = true;
       this.titleDialog = "Cập nhật liên hệ";
-
       this.rowData = row;
-      // console.log(row);
+      
     },
-     handleDelete(row) {
+    handleDelete(row) {
       this.$confirm(
         "Bạn muốn xóa nhân viên " + row.FullName + ". Tiếp tục?",
         "Cảnh báo",
@@ -196,6 +204,40 @@ export default {
               this.$message({
                 type: "success",
                 message: "Xóa nhân viên thành công!",
+              });
+              this.fetchData();
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "Không có thay đổi",
+          });
+        });
+    },
+    handleAdd(row) {
+      this.$confirm(
+        "Bạn muốn khôi phục nhân viên " + row.FullName + ". Tiếp tục?",
+        "Cảnh báo",
+        {
+          confirmButtonText: "Xác nhận",
+          cancelButtonText: "Hủy",
+          type: "warning",
+        }
+      )
+        .then(() => {
+          row.Status = 1;
+          const req = {
+            UserName: Cookies.get("UserName"),
+            Token: Cookies.get("Token"),
+            EmployeeInfo: row,
+          };
+          updateEmployeeList(req).then((res) => {
+            if (res.RespCode == 0) {
+              this.$message({
+                type: "success",
+                message: "Khôi phục nhân viên thành công!",
               });
               this.fetchData();
             }
