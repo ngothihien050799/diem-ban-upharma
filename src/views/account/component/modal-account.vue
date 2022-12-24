@@ -9,6 +9,12 @@
     <el-form-item label="Email">
       <el-input v-model="form.Email" placeholder="Nhập email" />
     </el-form-item>
+    <el-form-item label="Trạng thái" v-if="rowData">
+      <el-radio-group v-model="form.Status" >
+        <el-radio :label="(Status = 2)">Duyệt</el-radio>
+        <el-radio :label="(Status = 1)">Mới tạo</el-radio>
+      </el-radio-group>
+    </el-form-item>
   </el-form>
 
   <div class="dialog-footer">

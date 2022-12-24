@@ -198,7 +198,9 @@ export default {
             Token: Cookies.get("Token"),
             EmployeeInfo: row,
           };
-          if ((row.Stauts == 1)) {
+          console.log(row.Status);
+          console.log(row.Status == 1);
+          if (row.Status == 1) {
             row.Status = 0;
             console.log(row.Status);
             updateEmployeeList(req).then((res) => {
@@ -210,7 +212,7 @@ export default {
                 this.fetchData();
               }
             });
-          } else if ((row.Status == 0)) {
+          } else if (row.Status == 0) {
             row.Status = -1;
             console.log(row.Status);
             updateEmployeeList(req).then((res) => {
