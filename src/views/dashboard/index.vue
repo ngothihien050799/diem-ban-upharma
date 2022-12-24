@@ -1,5 +1,10 @@
 <template>
   <div class="dashboard">
+    <div class="dashboard-hoso row">
+      <div class="col-lg-3" v-for="(item, index) in hosoList" :key="index">
+        <card-brief :CardItem="item" />
+      </div>
+    </div>
     <div class="dashboard-select row">
       <div
         class="dashboard-select-item"
@@ -18,7 +23,7 @@
       <div class="col-sm-12 col-md-12 col-lg-12 bg-white dashboard-chart-left">
         <ChartComponent />
       </div>
-      <div class="dashboard-chart-right row ">
+      <div class="dashboard-chart-right row">
         <div class="d-flex round-item">
           <round-chart
             class="dashboard-chart-right-item col-lg-6"
@@ -59,6 +64,7 @@ import RoundChart from "./component/RoundChart.vue";
 import TableComponent from "./component/TableComponent.vue";
 import MapComponent from "./component/MapComponent.vue";
 import Cookies from "js-cookie";
+import CardBrief from "./component/CardBrief.vue";
 
 export default {
   components: {
@@ -68,9 +74,42 @@ export default {
     RoundChart,
     TableComponent,
     MapComponent,
+    CardBrief,
   },
   data() {
+    CardBrief;
     return {
+      hosoList: [
+        {
+          nameCard: "Tổng hồ sơ",
+          valueCard: "5",
+          iconUpDown: "fa-solid fa-arrow-up-long",
+          bgColor: "#409EFF",
+          growthCard: "3 ",
+        },
+        {
+          nameCard: "Hoàn thành",
+          valueCard: "21",
+          iconUpDown: "fa-solid fa-arrow-down-long",
+          bgColor: "#67C23A",
+          growthCard: "1 ",
+        },
+        {
+          nameCard: "Chờ giao việc",
+          valueCard: "300",
+          iconUpDown: "fa-solid fa-arrow-up-long",
+          bgColor: "#E6A23C",
+          growthCard: "3",
+        },
+
+        {
+          nameCard: "Quá hạn",
+          valueCard: "21",
+          iconUpDown: "fa-solid fa-arrow-down-long",
+          bgColor: "#F56C6C",
+          growthCard: "1",
+        },
+      ],
       cardList: [
         {
           nameCard: "Doanh số (đồng)",
@@ -129,14 +168,14 @@ export default {
     };
   },
   created() {
-    console.log("TOken",Cookies.get("Token")); // Lấy token lưu trong cookies
+    console.log("TOken", Cookies.get("Token")); // Lấy token lưu trong cookies
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .dashboard {
-  margin: 20px 45px;
+  margin: 30px 45px;
   &-select {
     &-item {
       width: 250px;
@@ -153,11 +192,9 @@ export default {
       // height: 200px;
     }
     &-right {
-
       &-item {
         background: #fff;
         margin-top: 20px;
-     
       }
       // .round-item{
       //   justify-content: space-between;
