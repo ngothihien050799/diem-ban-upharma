@@ -21,3 +21,27 @@ export const getUserList = async (data) => {
   });
   return res.data;
 };
+export const addUser = async (data) => {
+  const res = await axios({
+    method: "POST",
+    url: BASE_URL + "User/GSPRegister",
+    data: data,
+  });
+  return res.data;
+};
+export const updateUser = async (data) => {
+  const res = await axios({
+    method: "POST",
+    url: BASE_URL + "User/UpdateUserInfo",
+    data: data,
+  });
+  return res.data;
+};
+export const SetUserRole = async (data) => {
+  const res = await axios({
+    method: "POST",
+    url: BASE_URL + "User/SetUserRole",
+    data: data,
+  });
+  return res.data;
+};
