@@ -198,8 +198,8 @@ export default {
             Token: Cookies.get("Token"),
             EmployeeInfo: row,
           };
-          console.log(row.Status);
-          console.log(row.Status == 1);
+          // console.log(row.Status);
+          // console.log(row.Status == 1);
           if (row.Status == 1) {
             row.Status = 0;
             console.log(row.Status);
