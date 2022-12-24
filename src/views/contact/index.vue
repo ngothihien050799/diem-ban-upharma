@@ -147,7 +147,7 @@ export default {
         }
       });
     },
-     fetchArea() {
+    fetchArea() {
       const req = {
         Username: Cookies.get("UserName"),
         Token: Cookies.get("Token"),
@@ -170,7 +170,7 @@ export default {
         }
       });
     },
-    
+
     handleCreate() {
       this.centerDialogVisible = true;
       this.titleDialog = "Tạo mới hồ sơ liên hệ";
@@ -180,8 +180,8 @@ export default {
       this.centerDialogVisible = true;
       this.titleDialog = "Cập nhật liên hệ";
       this.rowData = row;
-      
     },
+
     handleDelete(row) {
       this.$confirm(
         "Bạn muốn xóa nhân viên " + row.FullName + ". Tiếp tục?",
@@ -193,21 +193,36 @@ export default {
         }
       )
         .then(() => {
-          row.Status = 0;
           const req = {
             UserName: Cookies.get("UserName"),
             Token: Cookies.get("Token"),
             EmployeeInfo: row,
           };
-          updateEmployeeList(req).then((res) => {
-            if (res.RespCode == 0) {
-              this.$message({
-                type: "success",
-                message: "Xóa nhân viên thành công!",
-              });
-              this.fetchData();
-            }
-          });
+          if ((row.Stauts == 1)) {
+            row.Status = 0;
+            console.log(row.Status);
+            updateEmployeeList(req).then((res) => {
+              if (res.RespCode == 0) {
+                this.$message({
+                  type: "success",
+                  message: "Thay đổi trạng thái nhân sự thành công!",
+                });
+                this.fetchData();
+              }
+            });
+          } else if ((row.Status == 0)) {
+            row.Status = -1;
+            console.log(row.Status);
+            updateEmployeeList(req).then((res) => {
+              if (res.RespCode == 0) {
+                this.$message({
+                  type: "success",
+                  message: "Xóa nhân viên thành công!",
+                });
+                this.fetchData();
+              }
+            });
+          }
         })
         .catch(() => {
           this.$message({
