@@ -1,56 +1,37 @@
 <template>
-  <div class="round-chart">
-    <span class="round-chart-title text-center">{{ round.nameRound }}</span>
-    <canvas class="round-chart-item" :id="round.id"></canvas>
+  <div class="chart-round">
+    <canvas id="myChart1" height="100px" width="100px"> </canvas>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    round: Object,
-  },
   mounted() {
-    const ctx = document.getElementById(this.round.id);
+    // const ctx = document.getElementById(this.round.id);
+    const ctx = document.getElementById("myChart1");
 
     new Chart(ctx, {
       type: "doughnut",
-     
       data: {
-        labels: [],
+       
         datasets: [
           {
-            label: "Doanh thu ",
-            data: [50, 300],
-            backgroundColor: [this.round.color1, this.round.color2],
+            label: "Số công việc ",
+            data: [50, 30, 20],
+            backgroundColor: ["#67C23A", "#D0EF91", "#b1b3b8"],
             hoverOffset: 4,
           },
         ],
       },
-      options: {},
+     
     });
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.round-chart {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-  margin-left: 5px;
-  border-radius: 5px;
-  &-title {
-    color: #5d695d;
-    font-weight: 600;
-    font-size: 20px;
-    
-  }
-  &-item{
-    height: 120px !important;
-    width: 120px !important;
-  }
+.chart-round {
+  padding: 10px 0px;
+  height: 300px;
 }
 </style>

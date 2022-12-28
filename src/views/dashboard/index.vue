@@ -1,58 +1,106 @@
 <template>
   <div class="dashboard">
-    <div class="dashboard-hoso row">
-      <div class="col-lg-3" v-for="(item, index) in hosoList" :key="index">
-        <card-brief :CardItem="item" />
-      </div>
+    <!--  -->
+    <div class="dashboard-hoso">
+      <div class="dashboard-hoso-title">HỒ SƠ</div>
+      <el-row :gutter="20" class="dashboard-hoso-card">
+        <el-col
+          :xs="24"
+          :sm="12"
+          :md="12"
+          :lg="6"
+          v-for="(item, index) in hosoList"
+          :key="index"
+        >
+          <card-brief :CardItem="item" />
+        </el-col>
+      </el-row>
     </div>
-    <div class="dashboard-select row">
-      <div
-        class="dashboard-select-item"
-        v-for="(item, index) in selectList"
-        :key="index"
-      >
-        <SelectComponent :SelectItem="item" />
-      </div>
-    </div>
-    <div class="dashboard-doanhthu row">
-      <div class="col-lg-4" v-for="(item, index) in cardList" :key="index">
-        <CardCoponent :CardItem="item" />
-      </div>
-    </div>
-    <div class="dashboard-chart row">
-      <div class="col-sm-12 col-md-12 col-lg-12 bg-white dashboard-chart-left">
-        <ChartComponent />
-      </div>
-      <div class="dashboard-chart-right row">
-        <div class="d-flex round-item">
-          <round-chart
-            class="dashboard-chart-right-item col-lg-6"
-            v-for="(item, index) in rounds"
-            :key="index"
-            :round="item"
-          />
+
+    <!--  -->
+    <el-row :gutter="20" class="dashboard-congviec">
+      <el-col :xs="24" :sm="24" :md="16" :lg="16">
+        <div class="dashboard-congviec-list">
+          <!-- <div class="dashboard-congviec-list-title">
+            <el-icon color="#1D974A"><Briefcase /></el-icon>
+            <span class="title">CÔNG VIỆC</span>
+          </div> -->
+          <div class="dashboard-congviec-list-total">
+            <h2 class="fw-bold fs-1 pt-2">30</h2>
+            <p class="text-secondary fw-semibold fs-5">Tổng số công việc</p>
+          </div>
+          <el-row>
+            <el-col
+              :sm="24"
+              :md="12"
+              :lg="12"
+              v-for="(item, index) in congviecList"
+              :key="index"
+            >
+              <card-brieff :CardItem2="item" />
+            </el-col>
+          </el-row>
         </div>
-      </div>
-    </div>
+      </el-col>
 
-    <div class="dashboard-table row">
-      <div class="dashboard-table-top col-lg-12 card mt-4">
-        <div class="table-title">Top điểm bán có doanh số cao nhất</div>
-        <table-component />
-      </div>
-      <div class="col-lg-12 card mt-4">
-        <MapComponent />
-      </div>
-
-      <div class="col-lg-12 card mt-4">
-        <div class="table-title">Danh sách hồ sơ</div>
-        <table-component />
-      </div>
-      <div class="col-lg-12 card mt-4">
-        <div class="table-title">Công việc cần xử lý</div>
-        <table-component />
-      </div>
-    </div>
+      <el-col :xs="24" :sm="24" :md="8" :lg="8">
+        <div class="dashboard-congviec-round">
+          <div class="dashboard-congviec-round-title">
+            <el-icon color="#1D974A"><Briefcase /></el-icon>
+            <span class="title">CÔNG VIỆC</span>
+          </div>
+          <el-row :gutter="20">
+            <el-col :span="12"><round-chart /></el-col>
+            <el-col :span="12" class="dashboard-congviec-round-tab">
+              <el-col
+                class="dashboard-congviec-round-tab-item"
+                v-for="(item, index) in tabList"
+                :key="index"
+                ><tab :tabItem="item" />
+              </el-col>
+            </el-col>
+          </el-row>
+        </div>
+      </el-col>
+    </el-row>
+    <!--  -->
+    <el-row :gutter="20" class="dashboard-chart">
+      <el-col :xs="24" :sm="24" :md="24" :lg="24">
+        <div class="dashboard-chart-mix bg-white">
+          <div class="dashboard-chart-mix-title">THỜI GIAN THỰC HIỆN HỒ SƠ</div>
+          <ChartComponent />
+        </div>
+      </el-col>
+    </el-row>
+    <!--  -->
+    <el-row :gutter="20" class="dashboard-table">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <div class="dashboard-table-item bg-white">
+          <div class="dashboard-chart-mix-title">TOP HỒ SƠ</div>
+          <Table />
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="12" :lg="12">
+        <div class="dashboard-table-item bg-white">
+          <div class="dashboard-chart-mix-title">TOP NHÂN VIÊN THỰC HIỆN</div>
+          <TableNv />
+        </div>
+      </el-col>
+      <el-col :span="24">
+        <div class="dashboard-table-item bg-white">
+          <div class="dashboard-chart-mix-title">DANH SÁCH HỒ SƠ</div>
+          <TableComponent />
+        </div>
+      </el-col>
+      <el-col :span="24">
+        <div class="dashboard-table-item bg-white">
+          <div class="dashboard-chart-mix-title">
+            DANH SÁCH CÔNG VIỆC CẦN XỬ LÝ
+          </div>
+          <TableComponent />
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -65,7 +113,10 @@ import TableComponent from "./component/TableComponent.vue";
 import MapComponent from "./component/MapComponent.vue";
 import Cookies from "js-cookie";
 import CardBrief from "./component/CardBrief.vue";
-
+import CardBrieff from "./component/CardBrieff.vue";
+import Table from "@/views/dashboard/component/Table.vue";
+import TableNv from "@/views/dashboard/component/TableNv.vue";
+import tab from "@/views/dashboard/component/tab.vue";
 export default {
   components: {
     CardCoponent,
@@ -75,39 +126,85 @@ export default {
     TableComponent,
     MapComponent,
     CardBrief,
+    CardBrieff,
+    Table,
+    TableNv,
+    tab,
   },
   data() {
-    CardBrief;
     return {
       hosoList: [
         {
           nameCard: "Tổng hồ sơ",
           valueCard: "5",
           iconUpDown: "fa-solid fa-arrow-up-long",
-          bgColor: "#409EFF",
+          bgColor: "#1D974A",
           growthCard: "3 ",
         },
         {
           nameCard: "Hoàn thành",
           valueCard: "21",
           iconUpDown: "fa-solid fa-arrow-down-long",
-          bgColor: "#67C23A",
+          bgColor: "linear-gradient(180deg, #43EC10 0%, #327711 100%)",
           growthCard: "1 ",
         },
         {
           nameCard: "Chờ giao việc",
           valueCard: "300",
           iconUpDown: "fa-solid fa-arrow-up-long",
-          bgColor: "#E6A23C",
-          growthCard: "3",
+          bgColor: "#8A8585",
+          growthCard: "3 ",
         },
 
         {
           nameCard: "Quá hạn",
           valueCard: "21",
           iconUpDown: "fa-solid fa-arrow-down-long",
-          bgColor: "#F56C6C",
-          growthCard: "1",
+          bgColor: "linear-gradient(180deg, #D6A804 0%, #EB0707 100%)",
+          growthCard: "1 ",
+        },
+      ],
+      congviecList: [
+        {
+          nameCard: "Cần làm trong hôm nay",
+          valueCard: "2",
+          icon: "fa-solid fa-bell",
+          bgColor: "linear-gradient(180deg, #FFF500 0%, #A5DB0A 100%)",
+        },
+        {
+          nameCard: "Cần làm trong tuần",
+          valueCard: "5",
+          icon: "fa-solid fa-hourglass-start",
+          bgColor: "linear-gradient(180deg, #43EC10 0%, #327711 100%)",
+        },
+
+        {
+          nameCard: "Sắp quá hạn",
+          valueCard: "0",
+          icon: "fa-solid fa-hourglass-half",
+          bgColor: "linear-gradient(180deg, #F8DF04 0%, #FF5C00 100%)",
+        },
+
+        {
+          nameCard: "Quá hạn",
+          valueCard: "1",
+          icon: "fa-solid fa-triangle-exclamation",
+          bgColor: "red",
+        },
+      ],
+      tabList: [
+        {
+          nameTab: "Hoàn thành",
+          bgColor: "#67C23A",
+        },
+        {
+          nameTab: "Đang xử lý",
+          bgColor: "#D0EF91",
+        },
+
+        {
+          nameTab: "Chưa thực hiện",
+          bgColor: "#b1b3b8",
         },
       ],
       cardList: [
@@ -153,64 +250,117 @@ export default {
       ],
       rounds: [
         {
-          nameRound: "TỶ TRỌNG KHÁCH HÀNG SO VỚI KHU VỰC",
+          nameRound: "CÔNG VIỆC",
           id: "round1",
           color1: "#F57E25",
           color2: "#F3BD94",
-        },
-        {
-          nameRound: "DOANH THU SO VỚI TOÀN CÔNG TY",
-          id: "round2",
-          color1: "#6E9E0E",
-          color2: "#D0EF91",
+          color3: "#8A8585",
         },
       ],
     };
   },
   created() {
-    console.log("TOken", Cookies.get("Token")); // Lấy token lưu trong cookies
+    // console.log("TOken", Cookies.get("Token")); // Lấy token lưu trong cookies
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .dashboard {
-  margin: 30px 45px;
-  &-select {
-    &-item {
-      width: 250px;
+  margin: 20px 30px;
+  &-hoso {
+    &-title {
+      font-size: 20px;
+      font-weight: 700;
+      // color: #303133;
+      margin-bottom: 10px;
+      margin-left: 5px;
     }
-  }
-  &-doanhthu {
-    margin-top: 20px;
   }
   &-chart {
-    &-left {
-      border-radius: 5px;
-      padding: 20px;
-      margin-top: 20px;
-      // height: 200px;
-    }
-    &-right {
-      &-item {
-        background: #fff;
-        margin-top: 20px;
+    margin-bottom: 20px;
+    &-mix {
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      &-title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 30px;
       }
-      // .round-item{
-      //   justify-content: space-between;
+    }
+  }
+  &-congviec {
+    // margin: auto !important;
+    margin-bottom: 20px;
+
+    &-list {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+      // &-title {
+      //   display: flex;
+      //   align-items: center;
+      //   text-align: center;
+      //   font-size: 20px;
+      //   font-weight: 700;
+      //   line-height: 30px;
+      //   border-bottom: 2px solid #909d8d;
+      //   margin-bottom: 10px;
+      //   .title {
+      //     margin-left: 5px;
+      //   }
       // }
+      &-total {
+        text-align: center;
+      }
+    }
+    &-round {
+      height: 100%;
+      background: white;
+      padding: 20px;
+      // margin-left: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px !important;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      &-title {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 30px;
+        border-bottom: 2px solid #909d8d;
+        margin-bottom: 10px;
+        .title {
+          margin-left: 5px;
+        }
+      }
+      &-tab {
+        margin-top: 80px;
+        &-item {
+          margin: 20px;
+        }
+      }
+    }
+  }
+  &-table {
+    margin-bottom: 20px;
+    &-item {
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
   }
 }
-.card-header {
-  justify-content: space-between;
-}
-.table {
-  &-title {
-    padding: 20px 10px 0;
-    font-weight: 600;
-    font-size: 22px;
-    color: #5d695d;
+</style>
+<style>
+@media only screen and (max-width: 1000px) {
+  .dashboard-congviec-list {
+    margin-bottom: 20px !important;
   }
 }
 </style>

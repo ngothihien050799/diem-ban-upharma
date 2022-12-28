@@ -1,27 +1,47 @@
 <template>
-  <div class="container">
+  <div class="container" :class="!isCollapse ? 'width-190' : 'width-auto'">
     <div class="title">
       <img class="tile-logo" src="@/assets/logo.webp" alt="" />
-      <p class="title-text">Điểm bán Upharma</p>
+      <p class="title-text" v-if="!isCollapse">Điểm bán Upharma</p>
     </div>
 
-    <div class="menu">
-      <div class="menu-item" v-for="(item, index) in menuLst" :key="index">
-        <router-link :to="item.path">
-          <span class="icon" v-html="item.icon"></span>
-          <span class="text">{{ item.label }}</span>
-        </router-link>
-        <!-- <a href="">
-          <i class="fa-solid fa-chart-simple icon"></i>
-          <span class="text">Thống kê</span>
-        </a> -->
-      </div>
-    </div>
+    <el-menu
+      :collapse="isCollapse"
+      active-text-color="yellow"
+      background-color="#1d974a"
+      class="menu"
+      default-active="2"
+      router
+      text-color="#fff"
+      @open="handleOpen"
+      @close="handleClose"
+    >
+      <el-menu-item
+        class="menu-item"
+        v-for="(item, index) in menuLst"
+        :key="index"
+        :index="index + 1"
+        :route="item.path"
+      >
+        <el-tooltip
+          effect="light"
+          :content="item.label"
+          :disabled="!isCollapse"
+          placement="right"
+        >
+          <el-icon><span class="icon" v-html="item.icon"></span></el-icon>
+        </el-tooltip>
+        <span>{{ item.label }}</span>
+      </el-menu-item>
+    </el-menu>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    isCollapse: Boolean,
+  },
   data() {
     return {
       menuLst: [
@@ -72,6 +92,16 @@ export default {
           label: "Cài đặt",
           icon: "<i class='fa-solid fa-gear icon'></i>",
           path: "/cai-dat",
+          children: [
+            {
+              label: "Tài khoản",
+              path: "/tai-khoan",
+            },
+            {
+              label: "Lịch KT",
+              path: "/lich-KT",
+            },
+          ],
         },
         {
           value: 9,
@@ -88,27 +118,40 @@ export default {
       ],
     };
   },
+  methods: {
+    handleSubMenu() {
+      if (this.menuLst.chidren == 0) {
+      }
+    },
+  },
+  created() {},
+  watch: {
+    isCollapse() {
+      console.log(this.isCollapse);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .container {
-  display: flex;
-  flex-direction: column;
-
+  // display: flex;
+  // flex-direction: column;
+  padding-left: 0;
   .title {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 10px;
     color: #fff;
     font-family: "Dancing Script", cursive;
-    font-size: 20px;
+    font-size: 16px;
     border-bottom: solid 1px #fff;
-    padding-bottom: 10px;
+    padding: 0 0 10px 10px;
 
     img {
-      width: 40px;
-      height: 40px;
+      width: 34px;
+      height: 34px;
       border-radius: 5px;
     }
     &-text {
@@ -117,17 +160,19 @@ export default {
   }
 
   .menu {
-    font-family: "Roboto", sans-serif;
+    // font-family: "Roboto", sans-serif;
+    font-family: "Crete Round", serif;
     margin-top: 20px;
+    border: none !important;
     &-item {
-      margin-top: 15px;
-      margin-right: 20px;
-      margin-left: 10px;
+      // margin-top: 15px;
+      // margin-right: 20px;
+      // margin-left: 10px;
       a {
+        width: 100%;
         text-decoration: none;
         color: #fff;
         display: flex;
-        align-items: center;
         font-size: 16px;
         .icon {
           width: 20px;
@@ -143,16 +188,10 @@ export default {
     }
   }
 }
-a:hover {
-  background-color: white;
-  border-radius: 10px;
-  font-weight: 600;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  span {
-    color: #1d974a;
-  }
-}
 
+// .el-menu-vertical-demo {
+//   border: none !important;
+// }
 @media screen and (max-width: 1920px) {
   .container {
     font-size: 14px;
@@ -167,5 +206,34 @@ a:hover {
   .container {
     font-size: 10px;
   }
+}
+.width-190 {
+  width: 190px;
+}
+.width-auto {
+  width: auto;
+}
+</style>
+<style>
+.menu .el-menu-item * {
+  vertical-align: unset !important;
+  margin-left: 5px;
+}
+
+.menu .el-menu-item:hover {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* color: #1d974a; */
+  /* background-color: #fff; */
+  /* font-weight: 600; */
+}
+/* .menu .el-menu-item:active {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+ 
+  background: #fff !important;
+  color: #1d974a;
+} */
+
+.el-menu-item [class^="el-icon"] {
+  font-size: 14px !important;
 }
 </style>

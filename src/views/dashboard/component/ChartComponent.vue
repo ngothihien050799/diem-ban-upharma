@@ -1,7 +1,6 @@
 <template>
-  <h4 class="chart-title">Phân tích doanh số</h4>
-  <div class="chart-bar" style="position: relative; height:40vh; width:100%">
-    <canvas id="myChart"> </canvas>
+  <div class="chart-bar" >
+    <canvas id="myChart" height="100%"> </canvas>
   </div>
 </template>
 
@@ -14,26 +13,37 @@ export default {
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
+        labels: [
+          "T1",
+          "T2",
+          "T3",
+          "T4",
+          "T5",
+          "T6",
+          "T7",
+          "T8",
+          "T9",
+          "T10",
+          "T11",
+          "T12",
+        ],
         datasets: [
           {
             type: "line",
-            label: "Doanh số (triệu đồng)",
-            data: [
-              450, 500, 550, 450, 600, 850, 840, 600.5, 500, 700, 850, 600,
-            ],
-            borderColor: "#F57E25",
-            backgroundColor: "#F57E25",
+            label: "Thời gian xử lý TB (ngày)",
+            data: [45, 50, 55, 45, 60, 50, 80, 60, 50, 70, 85, 60],
+            borderColor: "#E6A23C",
+            backgroundColor: "#E6A23C",
             borderWidth: 1.5,
             yAxisID: "y1",
           },
           {
             type: "bar",
-            label: "Điểm bán",
+            label: "Hồ sơ",
             data: [12, 12, 12, 14, 14, 14, 15, 18, 22, 20, 20, 20],
             borderColor: "#0C9B1A",
             backgroundColor: "#0C9B1A",
-            barPercentage: 0.4,
+            barPercentage: 0.2,
             yAxisID: "y",
           },
         ],
@@ -76,12 +86,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chart-title {
-  font-weight: 600;
-  font-size: 22px;
-  color: #5d695d;
-}
-.chart-bar{
+
+.chart-bar {
   padding: 10px 0px;
+  height: 200px ;
+  width: 100% !important;
 }
 </style>

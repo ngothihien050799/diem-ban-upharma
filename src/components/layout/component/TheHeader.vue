@@ -1,18 +1,28 @@
 <template>
   <div class="header d-flex">
-    <div class="header-left">
+    <div class="header-left d-flex">
       <span @click="changeSidebar">
         <i class="header-left-icon fa-solid fa-bars"></i
       ></span>
-      <span class="header-left-text">
+      <el-breadcrumb separator="/" class="header-left-text">
+        <el-breadcrumb-item :to="{ path: '/' }">Trang chủ</el-breadcrumb-item>
+        <el-breadcrumb-item>Thống kê</el-breadcrumb-item>
+      </el-breadcrumb>
+      <!-- <span class="header-left-text">
         <span>Trang chủ </span>
         <span>/ Thống kê</span>
-      </span>
+      </span> -->
     </div>
 
     <div class="header-right d-flex ms-auto">
-      <i class="icon search fa-solid fa-magnifying-glass"></i>
-      <i class="icon fullscreen fa-solid fa-arrows-up-down-left-right"></i>
+      <div class="header-right-search">
+        <el-input
+          v-model="search"
+          placeholder="Tìm kiếm..."
+          :suffix-icon="Search"
+        />
+      </div>
+      <el-icon class="header-right-screen"><Rank /></el-icon>
       <a
         class="logout"
         href="#"
@@ -36,24 +46,26 @@
     <div class="nav"></div>
   </div>
 </template>
-
+<script setup>
+import { Search } from "@element-plus/icons-vue";
+</script>
 <script>
 export default {
-  props: {
-    userAge: Number,
-  },
+  props: {},
   data() {
     return {
-      
+      search:"",
     };
   },
   methods: {
     changeSidebar() {
-      let sidebar = document.getElementById("sidebar");
-      let mainPage = document.getElementById("main-page");
-      if (sidebar.style.display != "none") sidebar.style.display = "none";
-      else sidebar.style.display = "block";
+      // let sidebar = document.getElementById("sidebar");
+      // let mainPage = document.getElementById("main-page");
+      // if (sidebar.style.display != "none") sidebar.style.display = "none";
+      // else sidebar.style.display = "block";
       // mainPage.style.borderRadius = "0";
+      console.log("v");
+      this.$emit("changeSidebar");
     },
   },
 };
@@ -61,22 +73,21 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  height: 60px;
-  border-bottom: 1px solid #d4d8d6;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+  height: 50px;
+
+ box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   font-size: 14px;
-  line-height: 60px;
+  line-height: 50px;
   &-left {
     &-icon {
-      padding-left: 30px;
-      padding-right: 10px;
-      width: 18px;
-      height: 18px;
-      color: rgb(38, 141, 38);
-      cursor: pointer;
+      padding-left: 10px;
+      padding-right: 7px;
+      width: 20px;
+      height: 20px;
     }
     &-text {
       font-size: 14px;
+      line-height: 50px;
       &-item {
         text-decoration: none;
         color: #000;
@@ -88,14 +99,16 @@ export default {
     }
   }
   &-right {
-    line-height: 60px;
+    line-height: 50px;
     margin-right: 10px;
-
-    .icon {
-      width: 18px;
-      height: 18px;
-      margin-top: 15px;
-      margin-right: 10px;
+    &-search {
+      border-radius: 10px;
+    }
+    &-screen {
+      width: 22px;
+      height: 22px;
+      margin: 12px;
+      font-size: 25px;
     }
   }
   .img-logo {

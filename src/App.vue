@@ -15,7 +15,10 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Mulish&family=Roboto:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500&display=swap");
 #app {
+  /* font-family: 'Inter', sans-serif; */
+  /* font-family: 'Poppins', sans-serif; */
   font-family: "Roboto", sans-serif;
+  /* font-family: 'Crete Round', serif; */
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -1,120 +1,60 @@
 <template>
-  <div class="table">
-    <div class="table-list row d-flex">
-      <div class="table-list-title col-sm-12">
-        <table class="table table-striped table-hover bg-white">
-          <thead>
-            <tr class="table-th">
-              <th scope="col">Top</th>
-              <th scope="col ">Điểm bán</th>
-              <th scope="col">Doanh số</th>
-              <th scope="col custem">Khách hàng</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="table-boby">
-              <th scope="row">1</th>
-              <td>Nhà thuốc Upharma số 01</td>
-              <td>100.000.000</td>
-              <td>234</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Nhà thuốc Upharma số 02</td>
-              <td>100.000.000</td>
-              <td>234</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Nhà thuốc Upharma số 03</td>
-              <!-- <td colspan="2">Nhà thuốc Upharma số 03</td> -->
-              <td>100.000.000</td>
-              <td>300</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Nhà thuốc Upharma số 04</td>
-              <!-- <td colspan="2">Nhà thuốc Upharma số 03</td> -->
-              <td>100.000.000</td>
-              <td>300</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Nhà thuốc Upharma số 05</td>
-              <!-- <td colspan="2">Nhà thuốc Upharma số 03</td> -->
-              <td>100.000.000</td>
-              <td>300</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="d-flex justify-content-end">
-        <span class="arrow-item">
-          <a class="arrow-link" href="#" tabindex="-1"
-            ><i class="fa-solid fa-angles-left"></i
-          ></a>
-        </span>
-        <span class="arrow-item">
-          <a class="arrow-link" href="#" tabindex="-1"
-            ><i class="fa-solid fa-angle-left"></i
-          ></a>
-        </span>
-        <span class="arrow-item"><a class="arrow-link" href="#">1</a></span>
-        <span class="arrow-item"><a class="arrow-link" href="#">2</a></span>
-        <span class="arrow-item"><a class="arrow-link" href="#">3</a></span>
-        <span class="arrow-item">
-          <a class="arrow-link" href="#"
-            ><i class="fa-solid fa-angle-right"></i
-          ></a>
-        </span>
-        <span class="arrow-item">
-          <a class="arrow-link" href="#"
-            ><i class="fa-solid fa-angles-right"></i
-          ></a>
-        </span>
-      </div>
-    </div>
-  </div>
+  <el-table
+    :data="tableData"
+    class="table-item mt-2"
+    style="width: 100%"
+    stripe
+  >
+    <el-table-column type="index" label="" width="60" />
+    <el-table-column prop="name" label="Hồ sơ" min-width="150" />
+    <el-table-column prop="Status" label="Trạng thái" min-width="100" />
+    <el-table-column prop="" label="Xem" width="150">
+      <template #default="scope">
+        <i class="fa-solid fa-file" style="color: rgb(64, 158, 255)"></i>
+      </template>
+    </el-table-column>
+  </el-table>
+  <div class="table-more mt-3">Thêm</div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      itemLst: [{}],
+      tableData: [
+        {
+          name: "Mở mới điểm bán Upharma số 40",
+          address: "5",
+          Status: "Hoàn thành",
+        },
+        {
+          name: "Đóng điểm bán Upharma số 07",
+          address: "3",
+          Status: "Chờ xử lý",
+        },
+        {
+          name: "Mở mới điểm bán Upharma số 41",
+          address: "3",
+          Status: "Đang thực hiện",
+        },
+      ],
     };
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.table {
-  &-list {
-    padding: 20px;
-    .table {
-      &-th {
-        background: #eeeeee;
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        font-weight: 600;
-        font-size: 14px;
-      }
-      td {
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 25px;
-        color: #797575;
-      }
+<style lang="scss" scoped></style>
+<style lang="scss">
+.table-item {
+  .el-table__header-wrapper {
+    th {
+      background-color: #eeeeee !important;
+      // border-bottom: 1px solid #797575 !important;
+      color: #303133;
     }
   }
-  .arrow-item {
-    margin-right: 20px;
-
-    .arrow-link {
-      text-decoration: none;
-      color: #909d8d;
-    }
-  }
+}
+.table-more {
+  float: right;
 }
 </style>

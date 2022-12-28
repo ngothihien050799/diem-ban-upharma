@@ -18,6 +18,7 @@ import WareHouse from "@/views/wareHouse/index";
 import Setting from "@/views/settingg/index";
 import Account from "@/views/account/index";
 import Default from "@/views/default/index";
+import AreaDetail from "@/views/area/component/areaDetail.vue"
 const routes = [
   {
     path: "/login",
@@ -56,6 +57,12 @@ const routes = [
       {
         path: "khu-vuc",
         component: Area,
+        children:[
+          {
+            path: "thong-tin-khu-vuc",
+            component:AreaDetail,
+          },
+        ]
       },
       {
         path: "lien-he",
