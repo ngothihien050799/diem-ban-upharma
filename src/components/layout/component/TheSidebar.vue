@@ -217,9 +217,11 @@ export default {
 <style>
 .menu .el-menu-item * {
   vertical-align: unset !important;
-  margin-left: 5px;
+  /* margin-left: 5px; */
 }
-
+.menu .el-menu {
+  font-family: "Roboto", sans-serif !important;
+}
 .menu .el-menu-item:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   /* color: #1d974a; */

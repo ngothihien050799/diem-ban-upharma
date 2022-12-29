@@ -32,6 +32,13 @@ export default {
 <style lang="scss" scoped>
 .chart-round {
   padding: 10px 0px;
-  height: 300px;
+  height: 250px;
+}
+</style>
+<style>
+@media only screen and (max-width: 1400px) {
+  .chart-round {
+    height: 140px !important;
+  }
 }
 </style>

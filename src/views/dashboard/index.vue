@@ -1,106 +1,150 @@
 <template>
-  <div class="dashboard">
-    <!--  -->
-    <div class="dashboard-hoso">
-      <div class="dashboard-hoso-title">HỒ SƠ</div>
-      <el-row :gutter="20" class="dashboard-hoso-card">
-        <el-col
-          :xs="24"
-          :sm="12"
-          :md="12"
-          :lg="6"
-          v-for="(item, index) in hosoList"
-          :key="index"
-        >
-          <card-brief :CardItem="item" />
-        </el-col>
-      </el-row>
-    </div>
+  <div class="dashboard row">
+    <div class="dashboard-left col-lg-8">
+      <!--  -->
+      <div class="dashboard-hoso">
+        <div class="dashboard-hoso-title">HỒ SƠ</div>
+        <el-row :gutter="20" class="dashboard-hoso-card">
+          <el-col
+            :xs="24"
+            :sm="12"
+            :md="12"
+            :lg="6"
+            v-for="(item, index) in hosoList"
+            :key="index"
+          >
+            <card-brief :CardItem="item" />
+          </el-col>
+        </el-row>
+      </div>
 
-    <!--  -->
-    <el-row :gutter="20" class="dashboard-congviec">
-      <el-col :xs="24" :sm="24" :md="16" :lg="16">
-        <div class="dashboard-congviec-list">
-          <!-- <div class="dashboard-congviec-list-title">
+      <!--  -->
+      <el-row :gutter="20" class="dashboard-congviec">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16">
+          <div class="dashboard-congviec-list">
+            <!-- <div class="dashboard-congviec-list-title">
             <el-icon color="#1D974A"><Briefcase /></el-icon>
             <span class="title">CÔNG VIỆC</span>
           </div> -->
-          <div class="dashboard-congviec-list-total">
-            <h2 class="fw-bold fs-1 pt-2">30</h2>
-            <p class="text-secondary fw-semibold fs-5">Tổng số công việc</p>
-          </div>
-          <el-row>
-            <el-col
-              :sm="24"
-              :md="12"
-              :lg="12"
-              v-for="(item, index) in congviecList"
-              :key="index"
-            >
-              <card-brieff :CardItem2="item" />
-            </el-col>
-          </el-row>
-        </div>
-      </el-col>
-
-      <el-col :xs="24" :sm="24" :md="8" :lg="8">
-        <div class="dashboard-congviec-round">
-          <div class="dashboard-congviec-round-title">
-            <el-icon color="#1D974A"><Briefcase /></el-icon>
-            <span class="title">CÔNG VIỆC</span>
-          </div>
-          <el-row :gutter="20">
-            <el-col :span="12"><round-chart /></el-col>
-            <el-col :span="12" class="dashboard-congviec-round-tab">
+            <div class="dashboard-congviec-list-total">
+              <h2 class="fw-bold fs-1 pt-2">30</h2>
+              <p class="text-secondary fw-semibold fs-5">Tổng số công việc</p>
+            </div>
+            <el-row>
               <el-col
-                class="dashboard-congviec-round-tab-item"
-                v-for="(item, index) in tabList"
+                :sm="24"
+                :md="12"
+                :lg="12"
+                v-for="(item, index) in congviecList"
                 :key="index"
-                ><tab :tabItem="item" />
+              >
+                <card-brieff :CardItem2="item" />
               </el-col>
-            </el-col>
-          </el-row>
-        </div>
-      </el-col>
-    </el-row>
-    <!--  -->
-    <el-row :gutter="20" class="dashboard-chart">
-      <el-col :xs="24" :sm="24" :md="24" :lg="24">
-        <div class="dashboard-chart-mix bg-white">
-          <div class="dashboard-chart-mix-title">THỜI GIAN THỰC HIỆN HỒ SƠ</div>
-          <ChartComponent />
-        </div>
-      </el-col>
-    </el-row>
-    <!--  -->
-    <el-row :gutter="20" class="dashboard-table">
-      <el-col :xs="24" :sm="24" :md="12" :lg="12">
-        <div class="dashboard-table-item bg-white">
-          <div class="dashboard-chart-mix-title">TOP HỒ SƠ</div>
-          <Table />
-        </div>
-      </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="12">
-        <div class="dashboard-table-item bg-white">
-          <div class="dashboard-chart-mix-title">TOP NHÂN VIÊN THỰC HIỆN</div>
-          <TableNv />
-        </div>
-      </el-col>
-      <el-col :span="24">
-        <div class="dashboard-table-item bg-white">
-          <div class="dashboard-chart-mix-title">DANH SÁCH HỒ SƠ</div>
-          <TableComponent />
-        </div>
-      </el-col>
-      <el-col :span="24">
-        <div class="dashboard-table-item bg-white">
-          <div class="dashboard-chart-mix-title">
-            DANH SÁCH CÔNG VIỆC CẦN XỬ LÝ
+            </el-row>
           </div>
-          <TableComponent />
-        </div>
-      </el-col>
-    </el-row>
+        </el-col>
+
+        <el-col :xs="24" :sm="24" :md="8" :lg="8">
+          <div class="dashboard-congviec-round">
+            <div class="dashboard-congviec-round-title">
+              <el-icon color="#1D974A"><Briefcase /></el-icon>
+              <span class="title">CÔNG VIỆC</span>
+            </div>
+            <el-row :gutter="20">
+              <el-col :xs="24" :sm="24" :md="12" :lg="12"
+                ><round-chart
+              /></el-col>
+              <el-col
+                :xs="24"
+                :sm="24"
+                :md="24"
+                :lg="12"
+                class="dashboard-congviec-round-tab"
+              >
+                <el-col
+                  class="dashboard-congviec-round-tab-item"
+                  v-for="(item, index) in tabList"
+                  :key="index"
+                  ><tab :tabItem="item" />
+                </el-col>
+              </el-col>
+            </el-row>
+          </div>
+        </el-col>
+      </el-row>
+      <!--  -->
+      <el-row :gutter="20" class="dashboard-chart">
+        <el-col :xs="24" :sm="24" :md="24" :lg="24">
+          <div class="dashboard-chart-mix bg-white">
+            <div class="dashboard-chart-mix-title">
+              THỜI GIAN THỰC HIỆN HỒ SƠ
+            </div>
+            <ChartComponent />
+          </div>
+        </el-col>
+      </el-row>
+      <!--  -->
+      <el-row :gutter="20" class="dashboard-table">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12">
+          <div class="dashboard-table-item bg-white">
+            <div class="dashboard-chart-mix-title">TOP HỒ SƠ</div>
+            <Table />
+          </div>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="12" :lg="12">
+          <div class="dashboard-table-item bg-white">
+            <div class="dashboard-chart-mix-title">TOP NHÂN VIÊN THỰC HIỆN</div>
+            <TableNv />
+          </div>
+        </el-col>
+        <el-col :span="24">
+          <div class="dashboard-table-item bg-white">
+            <div class="dashboard-chart-mix-title">DANH SÁCH HỒ SƠ</div>
+            <TableComponent />
+          </div>
+        </el-col>
+        <el-col :span="24">
+          <div class="dashboard-table-item bg-white">
+            <div class="dashboard-chart-mix-title">
+              DANH SÁCH CÔNG VIỆC CẦN XỬ LÝ
+            </div>
+            <TableComponent />
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="dashboard-right col-lg-4">
+      <div class="dashboard-right-title">Doanh thu</div>
+
+      <el-row :gutter="20">
+        <el-col  :sm="24" :md="24" :lg="24">
+          <el-date-picker
+            v-model="value2"
+            type="month"
+            placeholder="Thời gian"
+            format="MM/YYYY"
+            size="large"
+            class="dashboard-right-time"
+          />
+        </el-col>
+        <el-col
+          class="dashboard-right-select"
+          :sm="24"
+          :md="12"
+          :lg="12"
+          v-for="(item, index) in selectList"
+          :key="index"
+        >
+          <SelectComponent :SelectItem="item" />
+        </el-col>
+        <el-col class="dashboard-right-table" :sm="24" :md="24" :lg="24">
+          <TableDt />
+        </el-col>
+        <el-col class="dashboard-right-map" :sm="24" :md="24" :lg="24">
+          <MapComponent />
+        </el-col>
+      </el-row>
+    </div>
   </div>
 </template>
 
@@ -117,6 +161,7 @@ import CardBrieff from "./component/CardBrieff.vue";
 import Table from "@/views/dashboard/component/Table.vue";
 import TableNv from "@/views/dashboard/component/TableNv.vue";
 import tab from "@/views/dashboard/component/tab.vue";
+import TableDt from "@/views/dashboard/component/TableDt.vue";
 export default {
   components: {
     CardCoponent,
@@ -130,6 +175,7 @@ export default {
     Table,
     TableNv,
     tab,
+    TableDt,
   },
   data() {
     return {
@@ -236,10 +282,6 @@ export default {
       ],
       selectList: [
         {
-          nameForm: "Năm",
-          valueForm: "2023",
-        },
-        {
           nameForm: "Upharma-KV ",
           valueForm: "Hà Nội",
         },
@@ -339,7 +381,7 @@ export default {
         }
       }
       &-tab {
-        margin-top: 80px;
+        margin-top: 30px;
         &-item {
           margin: 20px;
         }
@@ -355,6 +397,31 @@ export default {
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     }
   }
+  &-right {
+    background: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+    padding: 20px;
+    &-time {
+      width: 50% !important;
+    }
+    &-title {
+      font-size: 20px;
+      font-weight: 700;
+
+      margin-bottom: 10px;
+      margin-left: 5px;
+    }
+    &-select {
+      margin-bottom: 15px;
+    }
+    &-table {
+      margin-bottom: 15px;
+    }
+    &-map {
+      margin-top: 15px;
+    }
+  }
 }
 </style>
 <style>
@@ -362,5 +429,9 @@ export default {
   .dashboard-congviec-list {
     margin-bottom: 20px !important;
   }
+}
+.dashboard-right-time{
+   width: 50% !important;
+   margin-right: 20px;
 }
 </style>

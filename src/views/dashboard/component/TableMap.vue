@@ -1,74 +1,66 @@
 <template>
-  <div class="map-table col-sm-12">
-    <table id="dtBasicExample" class="table table-hover bg-white rounded">
-      <thead>
-        <tr class="map-table-title">
-          <th scope="col">KHU VỰC</th>
-          <th scope="col ">ĐIỂM BÁN</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="map-table-list">
-          <td>HÀ NỘI</td>
-          <td>20</td>
-        </tr>
-        <tr class="map-table-list">
-          <td>HÀ NỘI</td>
-          <td>20</td>
-        </tr>
-        <tr class="map-table-list">
-          <td>HÀ NỘI</td>
-          <td>20</td>
-        </tr>
-        <tr class="map-table-list">
-          <td>HÀ NỘI</td>
-          <td>20</td>
-        </tr>
-        <tr class="map-table-list">
-          <td>HÀ NỘI</td>
-          <td>20</td>
-        </tr>
-        <tr class="map-table-list">
-          <td>HÀ NỘI</td>
-          <td>20</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="">
-    <a class="page-more" href="#">More >> </a>
-  </div>
+  <el-table
+    :data="tableData"
+    class="table-item mt-2"
+    style="width: 100%"
+    stripe
+    height="300"
+  >
+    <el-table-column type="index" label="" width="40" />
+    <el-table-column prop="name" label="KHU VỰC" min-width="150" />
+    <el-table-column prop="address" label="ĐIỂM BÁN" width="150">
+    </el-table-column>
+  </el-table>
 </template>
 
 <script>
 export default {
-  mounted() {},
+  data() {
+    return {
+      tableData: [
+        {
+          name: "HÀ NỘI",
+          address: "20",
+        },
+        {
+          name: "TP HCM",
+          address: "18",
+        },
+        {
+          name: "ĐÀ NẴNG",
+          address: "7",
+        },
+        {
+          name: "THÁI NGUYÊN",
+          address: "8",
+        },
+        {
+          name: "NGHỆ AN",
+          address: "6",
+        },
+        {
+          name: "HẢI PHÒNG",
+          address: "5",
+        },
+        {
+          name: "BẮC NINH",
+          address: "2",
+        },
+      ],
+    };
+  },
 };
 </script>
 
-<style lang="scss" scoped>
-.map-table {
-  text-align: center;
-  &-title {
-    height: 50px;
-    font-weight: 600;
-    font-size: 16px;
-    color: #797575;
-  }
-  &-list {
-    td {
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 30px;
-      color: #922222;
+<style lang="scss" scoped></style>
+<style lang="scss">
+.table-item {
+  .el-table__header-wrapper {
+    th {
+      background-color: #1d974a !important;
+      // border-bottom: 1px solid #797575 !important;
+      color: #fff;
     }
   }
-}
-
-.page-more {
-  float: right;
-  text-decoration: none;
-  color: #909d8d;
 }
 </style>
